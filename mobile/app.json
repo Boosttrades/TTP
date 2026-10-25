@@ -2,6 +2,7 @@
   "expo": {
     "name": "FPS Game",
     "slug": "fps-game-offline",
+    "owner": "marv_dev",
     "version": "1.0.0",
     "orientation": "landscape",
     "userInterfaceStyle": "dark",
