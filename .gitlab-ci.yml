@@ -23,4 +23,5 @@ build_android_apk:
       fi
     - npm install
   script:
+    - npx --yes eas-cli init --account marv_dev --non-interactive
     - npx --yes eas-cli build --platform android --profile preview --non-interactive
