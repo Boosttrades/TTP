@@ -1,0 +1,26 @@
+stages:
+  - android-build
+
+# Add EXPO_TOKEN under GitLab Project > Settings > CI/CD > Variables.
+# The token is kept as a protected/masked CI variable; never commit it to this repo.
+build_android_apk:
+  stage: android-build
+  image: node:20-bookworm
+  timeout: 60m
+  rules:
+    - changes:
+        - mobile/**/*
+        - .gitlab-ci.yml
+  variables:
+    EXPO_NO_TELEMETRY: "1"
+    CI: "1"
+  before_script:
+    - cd mobile
+    - |
+      if [ -z "${EXPO_TOKEN:-}" ]; then
+        echo "EXPO_TOKEN is missing. Add an Expo access token in GitLab CI/CD Variables, then retry this pipeline."
+        exit 1
+      fi
+    - npm install
+  script:
+    - npx --yes eas-cli build --platform android --profile preview --non-interactive
