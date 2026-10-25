@@ -1,9 +1,9 @@
 # FPS Game — Expo mobile app
 
-This is the native-app foundation, kept alongside the existing Vite prototype. It is intended to become an offline Android APK; the existing web prototype is not overwritten.
+This native-app foundation lives beside the existing Vite prototype. It is intended to become an offline Android APK; the existing web prototype is not overwritten.
 
 ## Offline environment
-The dense city GLB is bundled under `assets/`, so it can be packaged with the app rather than downloaded at runtime.
+The dense city GLB is bundled under `assets/` and Metro is configured to treat `.glb` as a bundled asset. Runtime city loading should not require internet access.
 
 ## Local development
 From this directory:
@@ -19,5 +19,5 @@ npx eas build --platform android --profile preview
 ```
 The preview profile is configured to produce an installable APK.
 
-## Important
-This is an initial rendering scaffold, not a finished game. It still needs on-device validation and integration of movement, collision, camera controls, and performance safeguards before it should be described as release-ready. The GLB loader integration must be verified against the installed Expo/Three.js package versions.
+## Readiness status
+This is a scaffold, not a finished or verified APK. The Three.js/Expo GLB loading path must be tested on a physical Android device, then movement, collision, camera controls, and performance safeguards need to be integrated and tested before release. Do not distribute it as release-ready until those checks pass.

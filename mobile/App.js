@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { GLView } from 'expo-gl';
-import { Renderer, loadAsync } from 'expo-three';
+import * as ExpoTHREE from 'expo-three';
 import * as THREE from 'three';
 
 export default function App() {
@@ -15,6 +15,7 @@ export default function App() {
   const onContextCreate = async (gl) => {
     let renderer;
     let frame = null;
+    let alive = true;
     try {
       const scene = new THREE.Scene();
       scene.background = new THREE.Color(0x9db4c2);
@@ -22,7 +23,7 @@ export default function App() {
       const camera = new THREE.PerspectiveCamera(65, gl.drawingBufferWidth / gl.drawingBufferHeight, 0.1, 300);
       camera.position.set(0, 3.2, 6);
       camera.lookAt(0, 1, 0);
-      renderer = new Renderer({ gl, antialias: true });
+      renderer = new ExpoTHREE.Renderer({ gl, antialias: false });
       renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
       renderer.setPixelRatio(1);
       scene.add(new THREE.HemisphereLight(0xe5f2ff, 0x49505a, 2));
@@ -30,16 +31,18 @@ export default function App() {
       sun.position.set(15, 28, 10);
       scene.add(sun);
 
-      // GLB is bundled with the app, so the environment does not need internet access.
+      // The model is bundled with the app so runtime loading needs no network.
       const modelAsset = require('./assets/dense_tightly_packed_city.glb');
-      const city = await loadAsync(modelAsset);
-      if (!mounted.current) return;
-      const root = city.scene || city;
+      const loaded = await ExpoTHREE.loadAsync(modelAsset);
+      if (!mounted.current || !alive) {
+        renderer.dispose?.();
+        return;
+      }
+      const root = loaded.scene || loaded;
       root.position.set(0, 0, 0);
       scene.add(root);
-      setStatus('City loaded. Mobile controls are the next integration step.');
+      setStatus('City loaded. Preparing mobile gameplay controls.');
 
-      let alive = true;
       const render = () => {
         if (!alive || !mounted.current) return;
         frame = requestAnimationFrame(render);
@@ -47,7 +50,6 @@ export default function App() {
         gl.endFrameEXP();
       };
       render();
-      return () => { alive = false; if (frame) cancelAnimationFrame(frame); renderer?.dispose?.(); };
     } catch (e) {
       console.error('Expo 3D startup failed:', e);
       if (mounted.current) {
@@ -55,6 +57,11 @@ export default function App() {
         setStatus('Could not start the 3D scene.');
       }
     }
+    return () => {
+      alive = false;
+      if (frame) cancelAnimationFrame(frame);
+      renderer?.dispose?.();
+    };
   };
 
   return (
