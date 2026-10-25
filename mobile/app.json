@@ -12,10 +12,6 @@
       "package": "com.iboostcorp.fpsgame",
       "versionCode": 1,
       "permissions": []
-    },
-    "plugins": [
-      "expo-asset",
-      "expo-gl"
-    ]
+    }
   }
 }
