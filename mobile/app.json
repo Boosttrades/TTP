@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "FPS Game",
+    "slug": "fps-game-offline",
+    "version": "1.0.0",
+    "orientation": "landscape",
+    "userInterfaceStyle": "dark",
+    "assetBundlePatterns": [
+      "assets/**/*"
+    ],
+    "android": {
+      "package": "com.iboostcorp.fpsgame",
+      "versionCode": 1,
+      "permissions": []
+    },
+    "plugins": [
+      "expo-asset",
+      "expo-gl"
+    ]
+  }
+}
