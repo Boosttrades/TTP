@@ -211,9 +211,9 @@ export function loadDenseCity(scene, {
         const barrierMaterial = new THREE.MeshStandardMaterial({
           color: 0x168dff,
           emissive: 0x087dff,
-          emissiveIntensity: 1.15,
+          emissiveIntensity: 1.4,
           transparent: true,
-          opacity: 0.22,
+          opacity: 0.34,
           roughness: 0.28,
           metalness: 0.08,
           side: THREE.DoubleSide,
@@ -238,7 +238,7 @@ export function loadDenseCity(scene, {
           panel.position.set(spec.x, barrierY, spec.z);
           panel.rotation.y = spec.rotation;
           panel.renderOrder = 5;
-          scene.add(panel);
+          // Keep the barrier inside the city hierarchy so the player's existing raycast collision detects it.\n          city.add(panel);
 
           // Bright top and bottom rails make the boundary legible from a distance.
           for (const y of [bounds.min.y + 0.08, bounds.min.y + barrierHeight]) {
@@ -250,7 +250,7 @@ export function loadDenseCity(scene, {
             rail.position.set(spec.x, y, spec.z);
             rail.rotation.y = spec.rotation;
             rail.renderOrder = 6;
-            scene.add(rail);
+            city.add(rail);
           }
         }
         scene.add(city);
