@@ -28,12 +28,12 @@ addEventListener('resize', updateGate);
 
 const loading = document.querySelector('#loading');
 const errorBox = document.querySelector('#error');
-const help = document.createElement('div'); help.id = 'help'; help.textContent = 'Drag to look · joystick to move · RUN / JUMP'; document.body.appendChild(help);
+const help = document.createElement('div'); help.id = 'help'; help.textContent = 'Drag to look Â· joystick to move Â· RUN / JUMP'; document.body.appendChild(help);
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x9db4c2);
 scene.fog = new THREE.Fog(0x9db4c2, 35, 125);
-const camera = new THREE.PerspectiveCamera(65, innerWidth / innerHeight, 0.1, 300);
+const camera = new THREE.PerspectiveCamera(95, innerWidth / innerHeight, 0.1, 300);
 const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.5));
 renderer.setSize(innerWidth, innerHeight);
