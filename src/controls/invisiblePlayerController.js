@@ -12,7 +12,7 @@ export class InvisiblePlayerController {
     this.speed = 4.2; this.runMultiplier = 1.55; this.jumpSpeed = 5.3;
     this.radius = 0.32; this.height = 1.7;
     this.input = { x: 0, y: 0, run: false, jump: false };
-    this.yaw = 0; this.pitch = -0.16; this.lookPointer = null; this.lastPointer = null;
+    this.yaw = 0; this.pitch = -0.04; this.lookPointer = null; this.lastPointer = null;
     this.raycaster = new THREE.Raycaster(); this.raycaster.near = 0; this.raycaster.far = this.radius + 0.12;
     this._makeCollider(); this._makeJoystick(); this._bindLook(); this._bindKeys(); this._bindButtons();
     this._resize = () => this._positionJoystick(); window.addEventListener('resize', this._resize);
@@ -88,9 +88,15 @@ export class InvisiblePlayerController {
     this.collider.position.set(this.position.x, this.position.y + this.height / 2, this.position.z); this._updateCamera(dt);
   }
   _updateCamera() {
-    const target = this.position.clone().add(new THREE.Vector3(0, 1.35, 0)), distance = 4.5, horizontal = Math.cos(this.pitch) * distance;
-    const desired = target.clone().add(new THREE.Vector3(Math.sin(this.yaw) * horizontal, 1.1 - Math.sin(this.pitch) * distance, Math.cos(this.yaw) * horizontal));
-    this.camera.position.lerp(desired, 0.18); this.camera.lookAt(target);
+    // First-person, street-level view: place the camera at eye height above the player's feet.
+    const eye = this.position.clone().add(new THREE.Vector3(0, 1.5, 0));
+    const direction = new THREE.Vector3(
+      -Math.sin(this.yaw) * Math.cos(this.pitch),
+      Math.sin(this.pitch),
+      -Math.cos(this.yaw) * Math.cos(this.pitch)
+    );
+    this.camera.position.copy(eye);
+    this.camera.lookAt(eye.clone().add(direction));
   }
   dispose() {
     window.removeEventListener('resize', this._resize); this.stick?.remove(); this.runButton?.remove(); this.jumpButton?.remove(); this.joystickStyle?.remove(); this.scene.remove(this.collider);
