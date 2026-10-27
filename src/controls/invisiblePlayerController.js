@@ -9,7 +9,7 @@ export class InvisiblePlayerController {
   constructor({ scene, camera, renderer, city, start = new THREE.Vector3(0, 0, 0) }) {
     this.scene = scene; this.camera = camera; this.renderer = renderer; this.city = city;
     this.position = start.clone(); this.velocityY = 0; this.grounded = true;
-    this.speed = 4.2; this.runMultiplier = 1.55; this.jumpSpeed = 5.3;
+    this.speed = 1.68; this.runMultiplier = 2.5; this.jumpSpeed = 5.3;
     this.radius = 0.32; this.height = 1.7;
     this.input = { x: 0, y: 0, run: false, jump: false };
     this.yaw = 0; this.pitch = -0.04; this.lookPointer = null; this.lastPointer = null;
@@ -89,7 +89,7 @@ export class InvisiblePlayerController {
   }
   _updateCamera() {
     // First-person, street-level view: place the camera at eye height above the player's feet.
-    const eye = this.position.clone().add(new THREE.Vector3(0, 1.5, 0));
+    const eye = this.position.clone().add(new THREE.Vector3(0, 1.0, 0));
     const direction = new THREE.Vector3(
       -Math.sin(this.yaw) * Math.cos(this.pitch),
       Math.sin(this.pitch),
