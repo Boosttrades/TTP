@@ -3,8 +3,29 @@ import { loadDenseCity } from './world/loadDenseCity.js';
 import { InvisiblePlayerController } from './controls/invisiblePlayerController.js';
 
 const style = document.createElement('style');
-style.textContent = `*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#9db4c2;font-family:system-ui,sans-serif;touch-action:none}canvas{display:block}#loading,#error{position:fixed;z-index:2000;left:50%;top:16px;transform:translateX(-50%);max-width:calc(100vw - 28px);padding:10px 14px;border-radius:10px;background:#101820df;color:white;font-size:14px}#error{top:64px;background:#632d2d}#error[hidden]{display:none}#help{position:fixed;top:14px;right:14px;color:white;background:#101820aa;padding:8px 10px;border-radius:8px;font-size:12px;z-index:900;pointer-events:none}`;
+style.textContent = `*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#9db4c2;font-family:system-ui,sans-serif;touch-action:none}canvas{display:block}#loading,#error{position:fixed;z-index:2000;left:50%;top:16px;transform:translateX(-50%);max-width:calc(100vw - 28px);padding:10px 14px;border-radius:10px;background:#101820df;color:white;font-size:14px}#error{top:64px;background:#632d2d}#error[hidden]{display:none}#help{position:fixed;top:14px;right:14px;color:white;background:#101820aa;padding:8px 10px;border-radius:8px;font-size:12px;z-index:900;pointer-events:none}@media(orientation:landscape){#landscape-gate{display:none!important}}#landscape-gate{position:fixed;inset:0;z-index:3000;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(145deg,#0d2635,#173f4b);color:white;text-align:center}#landscape-gate .panel{max-width:360px}#landscape-gate h1{font-size:26px;margin:0 0 12px}#landscape-gate p{line-height:1.5;color:#d8e8ed}#landscape-gate button{border:0;border-radius:12px;background:#8ce5c0;color:#10332b;font-size:16px;font-weight:800;padding:14px 20px;min-height:48px}`;
 document.head.appendChild(style);
+
+const gate = document.createElement('div');
+gate.id = 'landscape-gate';
+gate.innerHTML = '<div class="panel"><h1>Play in Landscape</h1><p>Turn your phone sideways for the full-screen 3D city and easier movement controls.</p><button type="button">Enter Game</button></div>';
+document.body.appendChild(gate);
+gate.querySelector('button').addEventListener('click', async () => {
+  try {
+    if (!document.fullscreenElement && document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen();
+  } catch {}
+  try {
+    if (screen.orientation?.lock) await screen.orientation.lock('landscape');
+  } catch {}
+  if (matchMedia('(orientation: landscape)').matches) gate.remove();
+});
+const updateGate = () => {
+  if (matchMedia('(orientation: landscape)').matches) gate.remove();
+  else if (!document.getElementById('landscape-gate')) document.body.appendChild(gate);
+};
+addEventListener('orientationchange', updateGate);
+addEventListener('resize', updateGate);
+
 const loading = document.querySelector('#loading');
 const errorBox = document.querySelector('#error');
 const help = document.createElement('div'); help.id = 'help'; help.textContent = 'Drag to look · joystick to move · RUN / JUMP'; document.body.appendChild(help);
