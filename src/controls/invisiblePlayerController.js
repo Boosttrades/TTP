@@ -89,7 +89,7 @@ export class InvisiblePlayerController {
   }
   _updateCamera() {
     // First-person, street-level view: place the camera at eye height above the player's feet.
-    const eye = this.position.clone().add(new THREE.Vector3(0, 1.0, 0));
+    const eye = this.position.clone().add(new THREE.Vector3(0, 0.2, 0));
     const direction = new THREE.Vector3(
       -Math.sin(this.yaw) * Math.cos(this.pitch),
       Math.sin(this.pitch),
