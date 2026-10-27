@@ -13,7 +13,7 @@ export class InvisiblePlayerController {
     this.radius = 0.32; this.height = 1.7;
     this.input = { x: 0, y: 0, run: false, jump: false, slide: false };
     this.yaw = 0; this.pitch = -0.04; this.lookPointer = null; this.lastPointer = null;
-    this.lookSensitivity = 1; this.layoutMode = false; this.controlScale = { stick: 1, run: 1, jump: 1, slide: 1 }; this.controlPositions = {};
+    this.lookSensitivity = 1; this.layoutMode = false; this.controlScale = { stick: 1, run: 1, jump: 1, slide: 1, settings: 1 }; this.controlPositions = {};
     this._loadControlSettings();
     this.raycaster = new THREE.Raycaster(); this.raycaster.near = 0; this.raycaster.far = this.radius + 0.12;
     this._makeCollider(); this._makeJoystick(); this._bindLook(); this._bindKeys(); this._bindButtons(); this._makeSettings();
@@ -40,7 +40,7 @@ export class InvisiblePlayerController {
       const saved = JSON.parse(localStorage.getItem('cityGameControlsV1') || '{}');
       if (Number.isFinite(saved.sensitivity)) this.lookSensitivity = THREE.MathUtils.clamp(saved.sensitivity, 0.4, 2.5);
       if (saved.scale && typeof saved.scale === 'object') {
-        for (const key of Object.keys(this.controlScale)) if (Number.isFinite(saved.scale[key])) this.controlScale[key] = THREE.MathUtils.clamp(saved.scale[key], 0.65, 1.6);
+        for (const key of Object.keys(this.controlScale)) if (Number.isFinite(saved.scale[key])) this.controlScale[key] = THREE.MathUtils.clamp(saved.scale[key], 0.55, 6.0);
       }
       if (saved.positions && typeof saved.positions === 'object') this.controlPositions = saved.positions;
     } catch {}
@@ -77,7 +77,7 @@ export class InvisiblePlayerController {
     this._applyControlLayout();
   }
   _controlElements() {
-    return { stick: this.stick, run: this.runButton, jump: this.jumpButton, slide: this.slideButton };
+    return { stick: this.stick, run: this.runButton, jump: this.jumpButton, slide: this.slideButton, settings: this.settingsButton };
   }
   _applyControlLayout() {
     const elements = this._controlElements();
@@ -108,7 +108,7 @@ export class InvisiblePlayerController {
       <p class="city-settings-note">Choose a control, adjust its size, then enter layout mode and drag controls to where you want them.</p>
       <label for="city-layout-control"><span>Control</span><select id="city-layout-control"><option value="stick">Movement joystick</option><option value="run">Run button</option><option value="jump">Jump button</option><option value="slide">Slide button</option></select></label>
       <label for="city-control-size"><span>Control size</span><strong id="city-control-size-value"></strong></label>
-      <input id="city-control-size" type="range" min="0.65" max="1.6" step="0.05">
+      <input id="city-control-size" type="range" min="0.55" max="6" step="0.05">
       <div class="city-settings-row"><button id="city-layout-toggle" class="primary">Arrange controls</button><button id="city-layout-reset">Reset layout</button></div>
       <p class="city-settings-note" id="city-layout-status">Layout mode is off.</p>
       <div class="city-settings-row"><button id="city-settings-close" class="primary">Done</button></div>
@@ -170,7 +170,7 @@ export class InvisiblePlayerController {
           const move = ev => {
             if (ev.pointerId !== e.pointerId) return;
             const delta = Math.max(ev.clientX - startX, ev.clientY - startY);
-            this.controlScale[key] = THREE.MathUtils.clamp(startScale + delta / 180, 0.55, 2.0);
+            this.controlScale[key] = THREE.MathUtils.clamp(startScale + delta / 180, 0.55, 6.0);
             el.style.scale = String(this.controlScale[key]);
           };
           const finish = ev => {
