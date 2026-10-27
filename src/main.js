@@ -32,8 +32,8 @@ const help = document.createElement('div'); help.id = 'help'; help.textContent =
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x9db4c2);
-scene.fog = new THREE.Fog(0x9db4c2, 35, 125);
-const camera = new THREE.PerspectiveCamera(95, innerWidth / innerHeight, 0.1, 300);
+scene.fog = new THREE.Fog(0xb8c6cc, 28, 205);
+const camera = new THREE.PerspectiveCamera(95, innerWidth / innerHeight, 0.1, 420);
 const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.5));
 renderer.setSize(innerWidth, innerHeight);
@@ -47,7 +47,7 @@ scene.add(new THREE.HemisphereLight(0xe8f2ff, 0x62584d, 1.65));
 const sun = new THREE.DirectionalLight(0xfff1d8, 2.6);
 sun.position.set(15, 28, 10);
 sun.castShadow = true;
-sun.shadow.mapSize.set(1024, 1024);
+sun.shadow.mapSize.set(1536, 1536);
 sun.shadow.camera.left = -45;
 sun.shadow.camera.right = 45;
 sun.shadow.camera.top = 45;
