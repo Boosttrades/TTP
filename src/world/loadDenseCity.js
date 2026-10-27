@@ -117,6 +117,40 @@ function addFacadeIvy(mesh, index) {
   mesh.add(vine);
 }
 
+function addArchitecturalFacadeDetails(mesh) {
+  if (!/building-[a-z]$/.test((mesh.name || '').toLowerCase())) return;
+  mesh.geometry.computeBoundingBox();
+  const b = mesh.geometry.boundingBox;
+  if (!b) return;
+  const width = b.max.x - b.min.x, height = b.max.y - b.min.y, depth = b.max.z - b.min.z;
+  if (width < 0.7 || height < 0.7 || depth < 0.35) return;
+  const frontZ = b.max.z + 0.018;
+  const frameMat = new THREE.MeshStandardMaterial({ color: 0x333b46, roughness: 0.76, metalness: 0.12 });
+  const sillMat = new THREE.MeshStandardMaterial({ color: 0xb8b4aa, roughness: 0.9 });
+  const glassMat = new THREE.MeshStandardMaterial({ color: 0x557e9e, emissive: 0x142a3a, emissiveIntensity: 0.12, roughness: 0.24, metalness: 0.16, side: THREE.DoubleSide });
+  const addBox = (w, h, d, x, y, z, material, label) => {
+    const part = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), material);
+    part.name = label; part.position.set(x, y, z); part.castShadow = true; part.receiveShadow = true; mesh.add(part);
+  };
+  const cols = width > 1.45 ? 2 : 1, rows = height > 1.55 ? 2 : 1;
+  const winW = Math.min(0.27, width * 0.66 / (cols * 1.55));
+  const winH = Math.min(0.24, height / (rows * 4.2));
+  const topY = b.min.y + height * (rows > 1 ? 0.72 : 0.68);
+  for (let row = 0; row < rows; row++) for (let col = 0; col < cols; col++) {
+    const x = b.min.x + width * (0.5 + (col - (cols - 1) / 2) * 0.42);
+    const y = topY - row * height * 0.34, frame = 0.035;
+    addBox(winW + frame * 2, winH + frame * 2, 0.045, x, y, frontZ, frameMat, 'DetailedWindowFrame');
+    addBox(winW, winH, 0.048, x, y, frontZ + 0.025, glassMat, 'DetailedWindowGlass');
+    addBox(winW + frame * 2.2, 0.035, 0.07, x, y - winH / 2 - frame, frontZ + 0.025, sillMat, 'WindowSill');
+    addBox(0.018, winH, 0.012, x, y, frontZ + 0.052, frameMat, 'WindowMullion');
+  }
+  addBox(width + 0.06, 0.055, depth + 0.04, (b.min.x + b.max.x) / 2, b.max.y - 0.018,
+    (b.min.z + b.max.z) / 2, frameMat, 'RoofEdgeFascia');
+  for (const x of [b.min.x + 0.035, b.max.x - 0.035]) {
+    addBox(0.025, height * 0.82, 0.022, x, b.min.y + height * 0.52, frontZ + 0.012, sillMat, 'FacadeCornerTrim');
+  }
+}
+
 export function loadDenseCity(scene, {
   url = '/assets/dense_tightly_packed_city.glb',
   position = [0, 0, 0],
@@ -135,6 +169,7 @@ export function loadDenseCity(scene, {
         city.scale.setScalar(scale);
         city.traverse((object) => {
           if (!object.isMesh) return;
+          addArchitecturalFacadeDetails(object);
           object.castShadow = true;
           object.receiveShadow = true;
           const materials = Array.isArray(object.material) ? object.material : [object.material];
