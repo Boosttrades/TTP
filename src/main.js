@@ -37,12 +37,31 @@ const camera = new THREE.PerspectiveCamera(95, innerWidth / innerHeight, 0.1, 30
 const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.5));
 renderer.setSize(innerWidth, innerHeight);
-renderer.shadowMap.enabled = false;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.08;
 document.body.appendChild(renderer.domElement);
-scene.add(new THREE.HemisphereLight(0xe5f2ff, 0x49505a, 2));
-const sun = new THREE.DirectionalLight(0xfff0d4, 2.2);
+scene.add(new THREE.HemisphereLight(0xe8f2ff, 0x62584d, 1.65));
+const sun = new THREE.DirectionalLight(0xfff1d8, 2.6);
 sun.position.set(15, 28, 10);
+sun.castShadow = true;
+sun.shadow.mapSize.set(1024, 1024);
+sun.shadow.camera.left = -45;
+sun.shadow.camera.right = 45;
+sun.shadow.camera.top = 45;
+sun.shadow.camera.bottom = -45;
+sun.shadow.camera.near = 1;
+sun.shadow.camera.far = 100;
+sun.shadow.bias = -0.00025;
+sun.shadow.normalBias = 0.025;
+sun.shadow.radius = 4;
 scene.add(sun);
+// Soft fill keeps pale walls readable while the directional sun creates clear street shadows.
+const fill = new THREE.DirectionalLight(0xdceaff, 0.45);
+fill.position.set(-18, 10, -14);
+scene.add(fill);
 
 let controller = null;
 const clock = new THREE.Clock();
