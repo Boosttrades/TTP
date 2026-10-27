@@ -76,18 +76,61 @@ export function loadDenseCity(scene, {
               const c = material.color;
               const brightness = (c.r * 0.2126 + c.g * 0.7152 + c.b * 0.0722);
               // Gently lift neutral wall finishes toward pale, sun-faded concrete without recolouring props.
-              if (wallLike && brightness > 0.28) {
-                c.lerp(new THREE.Color(0xd8d3ca), 0.24);
+              if ((wallLike || brightness > 0.18) && brightness > 0.18) {
+                c.lerp(new THREE.Color(0xe2ddd3), wallLike ? 0.48 : 0.12);
                 material.roughness = Math.max(material.roughness ?? 0.8, 0.82);
                 material.metalness = Math.min(material.metalness ?? 0, 0.08);
                 if (!material.bumpMap) {
                   material.bumpMap = crackedPlaster;
-                  material.bumpScale = 0.018;
+                  material.bumpScale = 0.045;
                 }
                 material.needsUpdate = true;
               }
             }
           }
+        });
+        // Derive the playable city perimeter from the loaded model's actual bounds.
+        city.updateMatrixWorld(true);
+        const bounds = new THREE.Box3().setFromObject(city);
+        const size = bounds.getSize(new THREE.Vector3());
+        const center = bounds.getCenter(new THREE.Vector3());
+        const w = Math.max(size.x, 24), d = Math.max(size.z, 24), h = Math.max(55, size.y + 40);
+        const barrierMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, depthWrite: false, side: THREE.DoubleSide });
+        const specs = [
+          [center.x, bounds.min.y + h / 2, bounds.min.z - d / 2 - 1, w + 4, h, 1],
+          [center.x, bounds.min.y + h / 2, bounds.max.z + d / 2 + 1, w + 4, h, 1],
+          [bounds.min.x - w / 2 - 1, bounds.min.y + h / 2, center.z, 1, h, d + 4],
+          [bounds.max.x + w / 2 + 1, bounds.min.y + h / 2, center.z, 1, h, d + 4]
+        ];
+        for (const [x, y, z, bw, bh, bd] of specs) {
+          const wall = new THREE.Mesh(new THREE.BoxGeometry(bw, bh, bd), barrierMat);
+          wall.name = 'InvisibleSolidWorldBoundary';
+          wall.position.set(x, y, z);
+          city.add(wall);
+        }
+        // Four distant copies are visual-only; the collision controller only checks the main city.
+        const offsets = [[-w * 1.35, 0, -d * 1.35], [w * 1.35, 0, -d * 1.35], [-w * 1.35, 0, d * 1.35], [w * 1.35, 0, d * 1.35]];
+        offsets.forEach((offset, index) => {
+          const mirage = city.clone(true);
+          const boundaryMeshes = [];
+          mirage.traverse(node => { if (node.name === 'InvisibleSolidWorldBoundary') boundaryMeshes.push(node); });
+          boundaryMeshes.forEach(node => node.parent?.remove(node));
+          mirage.name = 'DistantCityMirage_' + (index + 1);
+          mirage.position.set(position[0] + offset[0], position[1], position[2] + offset[2]);
+          mirage.traverse(node => {
+            if (!node.isMesh) return;
+            node.castShadow = false;
+            node.receiveShadow = false;
+            const mats = Array.isArray(node.material) ? node.material : [node.material];
+            for (const mat of mats) {
+              if (!mat) continue;
+              mat.transparent = true;
+              mat.opacity = Math.min(mat.opacity ?? 1, 0.58);
+              mat.depthWrite = false;
+              mat.needsUpdate = true;
+            }
+          });
+          scene.add(mirage);
         });
         scene.add(city);
         resolve(city);
