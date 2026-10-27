@@ -59,7 +59,9 @@ export class InvisiblePlayerController {
   }
   _bindButtons() {
     this.runButton = document.createElement('button'); this.runButton.className = 'tpp-action tpp-run'; this.runButton.textContent = 'RUN';
-    this.jumpButton = document.createElement('button'); this.jumpButton.className = 'tpp-action tpp-jump'; this.jumpButton.textContent = 'JUMP'; document.body.append(this.runButton, this.jumpButton);
+    this.jumpButton = document.createElement('button'); this.jumpButton.className = 'tpp-action tpp-jump'; this.jumpButton.textContent = 'JUMP';
+    this.slideButton = document.createElement('button'); this.slideButton.className = 'tpp-action tpp-slide'; this.slideButton.textContent = 'SLIDE';
+    document.body.append(this.runButton, this.jumpButton, this.slideButton);
     const runOn = e => { e.preventDefault(); this.input.run = true; }, runOff = () => { this.input.run = false; };
     this.runButton.addEventListener('pointerdown', runOn); this.runButton.addEventListener('pointerup', runOff); this.runButton.addEventListener('pointercancel', runOff); this.runButton.addEventListener('pointerleave', runOff);
     this.jumpButton.addEventListener('pointerdown', e => { e.preventDefault(); this.input.jump = true; });
@@ -72,17 +74,15 @@ export class InvisiblePlayerController {
     const direction = movement.clone().setY(0).normalize();
     const start = new THREE.Vector3(candidate.x - movement.x, candidate.y, candidate.z - movement.z);
     const reach = this.radius + movement.length() + 0.1;
-    const heights = [0.2, 0.55, 0.9, 1.25, 1.55];
-    const side = new THREE.Vector3(direction.z, 0, -direction.x).multiplyScalar(this.radius * 0.72);
-    // Check several body heights and three lateral positions so walls and closed doors act solid.
+    const heights = [0.35, 0.9, 1.45];
+    // Three centerline rays cover low obstacles, torso-height walls, and upper walls.
+    // Keeping this to three recursive raycasts per axis avoids a heavy per-frame collision cost.
     for (const height of heights) {
-      for (const lateral of [-1, 0, 1]) {
-        const origin = start.clone().addScaledVector(side, lateral).add(new THREE.Vector3(0, height, 0));
-        this.raycaster.set(origin, direction);
-        this.raycaster.far = reach;
-        const hit = this.raycaster.intersectObject(this.city, true).find(h => h.object.isMesh && h.distance <= reach && h.face);
-        if (hit) return true;
-      }
+      const origin = start.clone().add(new THREE.Vector3(0, height, 0));
+      this.raycaster.set(origin, direction);
+      this.raycaster.far = reach;
+      const hit = this.raycaster.intersectObject(this.city, true).find(h => h.object.isMesh && h.distance <= reach && h.face);
+      if (hit) return true;
     }
     return false;
   }
