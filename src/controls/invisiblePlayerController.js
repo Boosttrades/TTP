@@ -68,11 +68,21 @@ export class InvisiblePlayerController {
   _blockedAt(candidate, movement) {
     if (!this.city || movement.lengthSq() < 1e-10) return false;
     const direction = movement.clone().setY(0).normalize();
-    // Raycast from the pre-move position so the clearance check is frame-rate independent.
-    const origin = new THREE.Vector3(candidate.x - movement.x, candidate.y + 0.85, candidate.z - movement.z);
-    this.raycaster.set(origin, direction); this.raycaster.far = this.radius + movement.length() + 0.08;
-    const hits = this.raycaster.intersectObject(this.city, true);
-    return Boolean(hits.find(h => h.object.isMesh && h.distance <= this.radius + movement.length()));
+    const start = new THREE.Vector3(candidate.x - movement.x, candidate.y, candidate.z - movement.z);
+    const reach = this.radius + movement.length() + 0.1;
+    const heights = [0.2, 0.55, 0.9, 1.25, 1.55];
+    const side = new THREE.Vector3(direction.z, 0, -direction.x).multiplyScalar(this.radius * 0.72);
+    // Check several body heights and three lateral positions so walls and closed doors act solid.
+    for (const height of heights) {
+      for (const lateral of [-1, 0, 1]) {
+        const origin = start.clone().addScaledVector(side, lateral).add(new THREE.Vector3(0, height, 0));
+        this.raycaster.set(origin, direction);
+        this.raycaster.far = reach;
+        const hit = this.raycaster.intersectObject(this.city, true).find(h => h.object.isMesh && h.distance <= reach && h.face);
+        if (hit) return true;
+      }
+    }
+    return false;
   }
   update(dt) {
     dt = Math.min(Math.max(dt, 0), 0.05);
