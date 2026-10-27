@@ -223,7 +223,7 @@ export class InvisiblePlayerController {
     window.addEventListener('pointermove', e => {
       if (e.pointerId !== this.lookPointer || !this.lastPointer) return;
       const dx = e.clientX - this.lastPointer.x, dy = e.clientY - this.lastPointer.y; this.lastPointer = { x: e.clientX, y: e.clientY };
-      this.yaw -= dx * 0.004 * this.lookSensitivity; this.pitch = THREE.MathUtils.clamp(this.pitch - dy * 0.003 * this.lookSensitivity, -0.8, 0.35);
+      this.yaw -= dx * 0.004 * this.lookSensitivity; this.pitch = THREE.MathUtils.clamp(this.pitch - dy * 0.003 * this.lookSensitivity, -Math.PI / 2, Math.PI / 2);
     });
     const end = e => { if (e.pointerId === this.lookPointer) { this.lookPointer = null; this.lastPointer = null; } };
     window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
