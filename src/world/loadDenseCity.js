@@ -111,8 +111,8 @@ export function loadDenseCity(scene, {
         // Tile scenery directly against every side of the playable city so there is no visible gap.
         // The main city's invisible perimeter walls remain in place, so the player cannot enter these tiles.
         const offsets = [
-          [-w, 0, 0], [w, 0, 0], [0, 0, -d], [0, 0, d],
-          [-w, 0, -d], [w, 0, -d], [-w, 0, d], [w, 0, d],
+          [-size.x, 0, 0], [size.x, 0, 0], [0, 0, -size.z], [0, 0, size.z],
+          [-size.x, 0, -size.z], [size.x, 0, -size.z], [-size.x, 0, size.z], [size.x, 0, size.z],
         ];
         offsets.forEach((offset, index) => {
           const mirage = city.clone(true);
