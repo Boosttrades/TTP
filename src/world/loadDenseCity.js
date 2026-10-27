@@ -121,6 +121,7 @@ export function loadDenseCity(scene, {
             if (!node.isMesh) return;
             node.castShadow = false;
             node.receiveShadow = false;
+            node.material = Array.isArray(node.material) ? node.material.map(mat => mat?.clone()) : node.material?.clone();
             const mats = Array.isArray(node.material) ? node.material : [node.material];
             for (const mat of mats) {
               if (!mat) continue;
