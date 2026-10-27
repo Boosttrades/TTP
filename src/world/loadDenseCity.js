@@ -109,7 +109,8 @@ export function loadDenseCity(scene, {
           city.add(wall);
         }
         // Four distant copies are visual-only; the collision controller only checks the main city.
-        const gap = Math.max(2, Math.min(w, d) * 0.06); // Small positive gap: copies feel connected, but do not overlap the main city.\n        const offsets = [[-(w + gap), 0, -(d + gap)], [w + gap, 0, -(d + gap)], [-(w + gap), 0, d + gap], [w + gap, 0, d + gap]];
+        const gap = Math.max(2, Math.min(w, d) * 0.06); // Small positive gap: copies feel connected, but do not overlap the main city.
+        const offsets = [[-(w + gap), 0, -(d + gap)], [w + gap, 0, -(d + gap)], [-(w + gap), 0, d + gap], [w + gap, 0, d + gap]];
         offsets.forEach((offset, index) => {
           const mirage = city.clone(true);
           const boundaryMeshes = [];
