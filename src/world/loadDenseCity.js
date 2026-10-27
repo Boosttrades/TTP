@@ -7,7 +7,45 @@
  * Usage:
  *   const city = await loadDenseCity(scene);
  */
+import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+function makeCrackedPlasterBump() {
+  const canvas = document.createElement('canvas');
+  canvas.width = canvas.height = 256;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#808080';
+  ctx.fillRect(0, 0, 256, 256);
+  // Fine, low-contrast branching hairline cracks for worn plaster walls.
+  ctx.strokeStyle = '#4e4e4e';
+  ctx.lineWidth = 1.1;
+  const cracks = [
+    [[24, 4], [31, 26], [23, 42], [38, 60], [35, 81]],
+    [[31, 26], [49, 35], [57, 52]],
+    [[128, 0], [120, 18], [132, 34], [119, 51], [126, 72], [111, 89]],
+    [[132, 34], [151, 43], [158, 59]],
+    [[211, 9], [203, 28], [218, 45], [209, 66], [225, 83]],
+    [[203, 28], [185, 38], [179, 53]],
+    [[62, 117], [78, 132], [69, 151], [83, 169], [76, 192], [91, 214]],
+    [[78, 132], [99, 124], [110, 139]],
+    [[166, 105], [153, 123], [166, 142], [155, 161], [170, 181], [163, 202]],
+    [[153, 123], [135, 115], [126, 130]],
+    [[226, 150], [211, 169], [223, 188], [208, 209], [217, 235]],
+    [[211, 169], [193, 158], [181, 172]],
+    [[18, 223], [35, 207], [28, 190], [42, 177]],
+  ];
+  for (const path of cracks) {
+    ctx.beginPath();
+    ctx.moveTo(path[0][0], path[0][1]);
+    for (let i = 1; i < path.length; i++) ctx.lineTo(path[i][0], path[i][1]);
+    ctx.stroke();
+  }
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(1.5, 1.5);
+  texture.colorSpace = THREE.NoColorSpace;
+  return texture;
+}
 
 export function loadDenseCity(scene, {
   url = '/assets/dense_tightly_packed_city.glb',
@@ -15,6 +53,7 @@ export function loadDenseCity(scene, {
   scale = 1,
 } = {}) {
   const loader = new GLTFLoader();
+  const crackedPlaster = makeCrackedPlasterBump();
 
   return new Promise((resolve, reject) => {
     loader.load(
@@ -25,9 +64,29 @@ export function loadDenseCity(scene, {
         city.position.set(position[0], position[1], position[2]);
         city.scale.setScalar(scale);
         city.traverse((object) => {
-          if (object.isMesh) {
-            object.castShadow = true;
-            object.receiveShadow = true;
+          if (!object.isMesh) return;
+          object.castShadow = true;
+          object.receiveShadow = true;
+          const materials = Array.isArray(object.material) ? object.material : [object.material];
+          for (const material of materials) {
+            if (!material) continue;
+            const name = (material.name || object.name || '').toLowerCase();
+            const wallLike = /wall|building|concrete|plaster|brick|facade|stucco|cement/.test(name);
+            if (material.color) {
+              const c = material.color;
+              const brightness = (c.r * 0.2126 + c.g * 0.7152 + c.b * 0.0722);
+              // Gently lift neutral wall finishes toward pale, sun-faded concrete without recolouring props.
+              if (wallLike && brightness > 0.28) {
+                c.lerp(new THREE.Color(0xd8d3ca), 0.24);
+                material.roughness = Math.max(material.roughness ?? 0.8, 0.82);
+                material.metalness = Math.min(material.metalness ?? 0, 0.08);
+                if (!material.bumpMap) {
+                  material.bumpMap = crackedPlaster;
+                  material.bumpScale = 0.018;
+                }
+                material.needsUpdate = true;
+              }
+            }
           }
         });
         scene.add(city);
