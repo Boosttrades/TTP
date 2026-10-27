@@ -28,7 +28,7 @@ addEventListener('resize', updateGate);
 
 const loading = document.querySelector('#loading');
 const errorBox = document.querySelector('#error');
-const help = document.createElement('div'); help.id = 'help'; help.textContent = 'Drag to look Â· joystick to move Â· RUN / JUMP'; document.body.appendChild(help);
+const help = document.createElement('div'); help.id = 'help'; help.textContent = 'Drag to look ÃÂ· joystick to move ÃÂ· RUN / JUMP'; document.body.appendChild(help);
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x83c4f2);
@@ -92,12 +92,18 @@ function addCloud(x, y, z, scale = 1) {
   }
   scene.add(cloud);
 }
-addCloud(-32, 34, -62, 3.2);
-addCloud(18, 39, -105, 4.0);
-addCloud(68, 31, -48, 2.8);
-addCloud(-76, 37, 14, 3.4);
-addCloud(82, 42, 60, 3.8);
-addCloud(-18, 46, 88, 3.1);
+// Keep clouds relatively close and overlap their edges so the sky feels continuous rather than distant or disconnected.
+addCloud(-23, 24, -28, 5.2);
+addCloud(-6, 27, -34, 5.8);
+addCloud(13, 25, -29, 5.4);
+addCloud(29, 23, -22, 4.8);
+addCloud(-30, 22, -5, 4.7);
+addCloud(23, 24, 4, 5.0);
+addCloud(-17, 29, 21, 5.3);
+addCloud(4, 31, 27, 5.7);
+addCloud(30, 26, 24, 4.9);
+addCloud(-39, 27, 16, 4.6);
+addCloud(0, 34, -12, 4.8);
 
 
 let controller = null;
