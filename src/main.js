@@ -63,6 +63,43 @@ const fill = new THREE.DirectionalLight(0xdceaff, 0.45);
 fill.position.set(-18, 10, -14);
 scene.add(fill);
 
+// Soft, stylized cloud clusters above the city. Lightweight sphere meshes keep mobile rendering practical.
+const cloudMaterial = new THREE.MeshStandardMaterial({
+  color: 0xf7fbff,
+  roughness: 1,
+  metalness: 0,
+  transparent: true,
+  opacity: 0.94,
+  depthWrite: false
+});
+const cloudPuffGeometry = new THREE.SphereGeometry(1, 10, 7);
+function addCloud(x, y, z, scale = 1) {
+  const cloud = new THREE.Group();
+  cloud.position.set(x, y, z);
+  cloud.scale.setScalar(scale);
+  const puffs = [
+    [-2.1, 0, 0, 1.05], [-1.1, 0.45, 0, 1.35],
+    [0.15, 0.62, 0, 1.5], [1.35, 0.25, 0, 1.18],
+    [2.15, 0, 0, 0.86], [-0.25, -0.2, 0.35, 1.12]
+  ];
+  for (const [px, py, pz, size] of puffs) {
+    const puff = new THREE.Mesh(cloudPuffGeometry, cloudMaterial);
+    puff.position.set(px, py, pz);
+    puff.scale.set(size, size * 0.62, size * 0.72);
+    puff.castShadow = false;
+    puff.receiveShadow = false;
+    cloud.add(puff);
+  }
+  scene.add(cloud);
+}
+addCloud(-32, 34, -62, 3.2);
+addCloud(18, 39, -105, 4.0);
+addCloud(68, 31, -48, 2.8);
+addCloud(-76, 37, 14, 3.4);
+addCloud(82, 42, 60, 3.8);
+addCloud(-18, 46, 88, 3.1);
+
+
 let controller = null;
 const clock = new THREE.Clock();
 try {
