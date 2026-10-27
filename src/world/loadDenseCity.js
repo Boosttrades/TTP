@@ -239,23 +239,23 @@ export function loadDenseCity(scene, {
           });
           scene.add(mirage);
         });
-        // Visible blue safe-zone boundary at the edge of the playable city.
+        // Visible red safe-zone boundary at the edge of the playable city.
         // This is visual-only; the existing invisible boundary meshes still handle collision.
         const barrierHeight = Math.max(12, Math.min(24, size.y * 0.72));
         const barrierY = bounds.min.y + barrierHeight / 2;
         const barrierMaterial = new THREE.MeshStandardMaterial({
-          color: 0x168dff,
-          emissive: 0x087dff,
-          emissiveIntensity: 1.4,
+          color: 0xff2525,
+          emissive: 0xff1010,
+          emissiveIntensity: 1.65,
           transparent: true,
-          opacity: 0.34,
+          opacity: 0.48,
           roughness: 0.28,
           metalness: 0.08,
           side: THREE.DoubleSide,
           depthWrite: false
         });
         const edgeMaterial = new THREE.MeshBasicMaterial({
-          color: 0x39baff,
+          color: 0xff4545,
           transparent: true,
           opacity: 0.92,
           depthWrite: false,
@@ -269,7 +269,7 @@ export function loadDenseCity(scene, {
         ];
         for (const [index, spec] of barriers.entries()) {
           const panel = new THREE.Mesh(new THREE.PlaneGeometry(spec.width, barrierHeight), barrierMaterial);
-          panel.name = 'TransparentBlueSafeZoneBarrier_' + index;
+          panel.name = 'TransparentRedSafeZoneBarrier_' + index;
           panel.position.set(spec.x, barrierY, spec.z);
           panel.rotation.y = spec.rotation;
           panel.renderOrder = 5;
@@ -281,7 +281,7 @@ export function loadDenseCity(scene, {
               new THREE.BoxGeometry(spec.width, y === bounds.min.y + 0.08 ? 0.12 : 0.075, 0.09),
               edgeMaterial
             );
-            rail.name = 'BlueSafeZoneBarrierEdge_' + index;
+            rail.name = 'RedSafeZoneBarrierEdge_' + index;
             rail.position.set(spec.x, y, spec.z);
             rail.rotation.y = spec.rotation;
             rail.renderOrder = 6;
