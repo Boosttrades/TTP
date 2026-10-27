@@ -9,7 +9,7 @@ export class InvisiblePlayerController {
   constructor({ scene, camera, renderer, city, start = new THREE.Vector3(0, 0, 0) }) {
     this.scene = scene; this.camera = camera; this.renderer = renderer; this.city = city;
     this.position = start.clone(); this.velocityY = 0; this.grounded = true;
-    this.speed = 1.68; this.runMultiplier = 2.5; this.jumpSpeed = 5.3;
+    this.speed = 0.56; this.runMultiplier = 2.5; this.jumpSpeed = 5.3;
     this.radius = 0.32; this.height = 1.7;
     this.input = { x: 0, y: 0, run: false, jump: false };
     this.yaw = 0; this.pitch = -0.04; this.lookPointer = null; this.lastPointer = null;
