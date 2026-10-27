@@ -26,7 +26,7 @@ export class InvisiblePlayerController {
   }
   _makeJoystick() {
     const style = document.createElement('style');
-    style.textContent = `.tpp-stick-base{position:fixed;left:26px;bottom:30px;width:124px;height:124px;border-radius:50%;background:#ffffff20;border:2px solid #ffffff70;z-index:1000;touch-action:none;display:none}.tpp-stick-knob{position:absolute;width:54px;height:54px;left:33px;top:33px;border-radius:50%;background:#ffffff9c;border:2px solid #fff;box-sizing:border-box}.tpp-action{position:fixed;right:24px;bottom:36px;z-index:1001;width:58px;height:58px;padding:0;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid #ffffff55;background:#ffffff12;color:#ffffffd9;touch-action:manipulation;backdrop-filter:blur(2px)}.tpp-action svg,.city-settings-button svg{width:31px;height:31px;display:block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}.city-settings-button{width:48px;height:48px;padding:0;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid #ffffff55;background:#ffffff12;color:#ffffffd9;backdrop-filter:blur(2px)}.tpp-run{right:26px;bottom:100px}.tpp-jump{right:26px;bottom:38px}.tpp-slide{right:104px;bottom:38px}@media (pointer:coarse){.tpp-stick-base{display:block}}`;
+    style.textContent = `.tpp-stick-base{position:fixed;left:26px;bottom:30px;width:124px;height:124px;border-radius:50%;background:#ffffff20;border:2px solid #ffffff70;z-index:1000;touch-action:none;display:none}.tpp-stick-knob{position:absolute;width:54px;height:54px;left:33px;top:33px;border-radius:50%;background:#ffffff9c;border:2px solid #fff;box-sizing:border-box}.tpp-action{position:fixed;right:24px;bottom:36px;z-index:1001;width:58px;height:58px;padding:0;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid #ffffff55;background:#ffffff12;color:#ffffffd9;touch-action:manipulation;backdrop-filter:blur(2px);filter:grayscale(1);opacity:.72}.tpp-action svg,.city-settings-button svg{width:31px;height:31px;display:block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}.city-settings-button{width:48px;height:48px;padding:0;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid #ffffff55;background:#ffffff12;color:#ffffffd9;backdrop-filter:blur(2px)}.tpp-run{right:26px;bottom:100px}.tpp-jump{right:26px;bottom:38px}.tpp-slide{right:104px;bottom:38px}@media (pointer:coarse){.tpp-stick-base{display:block}}`;
     document.head.appendChild(style); this.joystickStyle = style;
     this.stick = document.createElement('div'); this.stick.className = 'tpp-stick-base';
     this.knob = document.createElement('div'); this.knob.className = 'tpp-stick-knob'; this.stick.appendChild(this.knob); document.body.appendChild(this.stick);
@@ -71,7 +71,7 @@ export class InvisiblePlayerController {
     `;
     document.head.appendChild(style); this.settingsStyle = style;
     this.settingsButton = document.createElement('button');
-    this.settingsButton.className = 'city-settings-button'; this.settingsButton.textContent = '⚙ Settings';
+    this.settingsButton.className = 'city-settings-button'; this.settingsButton.setAttribute('aria-label','Settings'); this.settingsButton.title='Settings'; this.settingsButton.textContent='⚙';
     this.settingsButton.addEventListener('click', () => this._openSettings());
     document.body.appendChild(this.settingsButton);
     this._applyControlLayout();
@@ -234,9 +234,9 @@ export class InvisiblePlayerController {
     window.addEventListener('keyup', e => { this.keys.delete(e.code); if (e.code === 'Space') this.input.jump = false; if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') this.input.run = false; });
   }
   _bindButtons() {
-    this.runButton = document.createElement('button'); this.runButton.className = 'tpp-action tpp-run'; this.runButton.textContent = 'RUN';
-    this.jumpButton = document.createElement('button'); this.jumpButton.className = 'tpp-action tpp-jump'; this.jumpButton.textContent = 'JUMP';
-    this.slideButton = document.createElement('button'); this.slideButton.className = 'tpp-action tpp-slide'; this.slideButton.textContent = 'SLIDE';
+    this.runButton = document.createElement('button'); this.runButton.className = 'tpp-action tpp-run'; this.runButton.setAttribute('aria-label','Run'); this.runButton.title='Run'; this.runButton.textContent='🏃';
+    this.jumpButton = document.createElement('button'); this.jumpButton.className = 'tpp-action tpp-jump'; this.jumpButton.setAttribute('aria-label','Jump'); this.jumpButton.title='Jump'; this.jumpButton.textContent='🦘';
+    this.slideButton = document.createElement('button'); this.slideButton.className = 'tpp-action tpp-slide'; this.slideButton.setAttribute('aria-label','Slide'); this.slideButton.title='Slide'; this.slideButton.textContent='⇘';
     document.body.append(this.runButton, this.jumpButton, this.slideButton);
     const runOn = e => { e.preventDefault(); this.input.run = true; }, runOff = () => { this.input.run = false; };
     this.runButton.addEventListener('pointerdown', runOn); this.runButton.addEventListener('pointerup', runOff); this.runButton.addEventListener('pointercancel', runOff); this.runButton.addEventListener('pointerleave', runOff);
