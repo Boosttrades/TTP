@@ -60,8 +60,14 @@ export class InvisiblePlayerController {
       .city-settings-panel select,.city-settings-panel button{border:1px solid #718999;border-radius:9px;padding:9px 11px;background:#203a4a;color:white;font:600 13px system-ui}
       .city-settings-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.city-settings-row button.primary{background:#8ce5c0;color:#10332b;border-color:#8ce5c0}
       .city-settings-note{font-size:12px;line-height:1.45;color:#bed0d9;margin:8px 0}
-      .city-layout-active{outline:3px dashed #8ce5c0!important;outline-offset:3px;touch-action:none!important}
-      .city-layout-hint{position:fixed;left:50%;top:62px;transform:translateX(-50%);z-index:1500;background:#10332beF;color:#fff;padding:9px 12px;border-radius:10px;font:700 12px system-ui;pointer-events:none;white-space:nowrap}
+      .city-layout-active{outline:2px dashed #8ce5c0!important;outline-offset:3px;touch-action:none!important;cursor:move!important;z-index:2401!important}
+      .city-layout-editor{position:fixed;inset:0;z-index:2300;pointer-events:none;background:#07131d28;font:13px system-ui;color:#fff}
+      .city-layout-toolbar{position:absolute;left:50%;top:12px;transform:translateX(-50%);display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:center;width:max-content;max-width:94vw;padding:10px 12px;background:#142635f2;border:1px solid #6b8799;border-radius:14px;box-shadow:0 8px 30px #0005;pointer-events:auto}
+      .city-layout-toolbar strong{font-size:14px}.city-layout-toolbar span{font-size:11px;color:#c6d8e2}
+      .city-layout-toolbar button{border:1px solid #718999;border-radius:8px;padding:8px 10px;background:#203a4a;color:white;font:700 12px system-ui}
+      .city-layout-toolbar .city-layout-done{background:#8ce5c0;color:#10332b;border-color:#8ce5c0}
+      .city-layout-resize-handle{position:absolute!important;right:-8px!important;bottom:-8px!important;width:26px!important;height:26px!important;border-radius:50%!important;background:#8ce5c0!important;border:2px solid #10332b!important;box-sizing:border-box!important;z-index:5!important;display:flex!important;align-items:center!important;justify-content:center!important;touch-action:none!important}
+      .city-layout-resize-handle i{display:block;width:9px;height:9px;border-right:2px solid #10332b;border-bottom:2px solid #10332b}
     `;
     document.head.appendChild(style); this.settingsStyle = style;
     this.settingsButton = document.createElement('button');
@@ -116,9 +122,8 @@ export class InvisiblePlayerController {
     const updateSelectedSize = () => { size.value = String(this.controlScale[select.value]); updateSize(); };
     sens.addEventListener('input', updateSensitivity); size.addEventListener('input', updateSize); select.addEventListener('change', updateSelectedSize);
     q('city-layout-toggle').addEventListener('click', () => {
-      this.layoutMode = !this.layoutMode;
-      q('city-layout-toggle').textContent = this.layoutMode ? 'Finish arranging' : 'Arrange controls';
-      q('city-layout-status').textContent = this.layoutMode ? 'Drag any outlined control to reposition it.' : 'Layout mode is off.';
+      this._closeSettings();
+      this.layoutMode = true;
       this._setLayoutMode();
     });
     q('city-layout-reset').addEventListener('click', () => {
@@ -131,22 +136,63 @@ export class InvisiblePlayerController {
   }
   _setLayoutMode() {
     const elements = this._controlElements();
-    const hint = document.querySelector('.city-layout-hint');
-    if (this.layoutMode && !hint) { const h = document.createElement('div'); h.className = 'city-layout-hint'; h.textContent = 'Drag controls to move them'; document.body.appendChild(h); }
-    if (!this.layoutMode) document.querySelector('.city-layout-hint')?.remove();
+    if (this.layoutMode) {
+      if (!this.layoutEditor) {
+        const editor = document.createElement('div');
+        editor.className = 'city-layout-editor';
+        editor.innerHTML = '<div class="city-layout-toolbar"><strong>Custom controls</strong><span>Drag buttons to move · drag corner to resize</span><button type="button" class="city-layout-reset-editor">Reset</button><button type="button" class="city-layout-done">Done</button></div>';
+        document.body.appendChild(editor);
+        this.layoutEditor = editor;
+        editor.querySelector('.city-layout-done').addEventListener('click', () => { this.layoutMode = false; this._setLayoutMode(); this._saveControlSettings(); });
+        editor.querySelector('.city-layout-reset-editor').addEventListener('click', () => {
+          this.controlPositions = {};
+          this.controlScale = { stick: 1, run: 1, jump: 1, slide: 1 };
+          this._applyControlLayout(); this._saveControlSettings();
+        });
+      }
+    } else {
+      this.layoutEditor?.remove(); this.layoutEditor = null;
+    }
     for (const [key, el] of Object.entries(elements)) {
       if (!el) continue;
       el.classList.toggle('city-layout-active', this.layoutMode);
+      let handle = el.querySelector?.('.city-layout-resize-handle');
+      if (this.layoutMode && !handle) {
+        handle = document.createElement('span');
+        handle.className = 'city-layout-resize-handle';
+        handle.setAttribute('aria-label', 'Drag to resize control');
+        handle.innerHTML = '<i></i>';
+        el.appendChild(handle);
+        handle.addEventListener('pointerdown', e => {
+          if (!this.layoutMode) return;
+          e.preventDefault(); e.stopPropagation();
+          const startX = e.clientX, startY = e.clientY, startScale = this.controlScale[key] || 1;
+          const move = ev => {
+            if (ev.pointerId !== e.pointerId) return;
+            const delta = Math.max(ev.clientX - startX, ev.clientY - startY);
+            this.controlScale[key] = THREE.MathUtils.clamp(startScale + delta / 180, 0.55, 2.0);
+            el.style.scale = String(this.controlScale[key]);
+          };
+          const finish = ev => {
+            if (ev.pointerId !== e.pointerId) return;
+            window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', finish);
+            this._saveControlSettings();
+          };
+          window.addEventListener('pointermove', move); window.addEventListener('pointerup', finish);
+        });
+      }
+      if (!this.layoutMode) handle?.remove();
       if (el.dataset.layoutBound) continue;
       el.dataset.layoutBound = '1';
       el.addEventListener('pointerdown', e => {
-        if (!this.layoutMode) return;
-        e.preventDefault(); e.stopPropagation(); el.setPointerCapture?.(e.pointerId);
+        if (!this.layoutMode || e.target.closest?.('.city-layout-resize-handle')) return;
+        e.preventDefault(); e.stopPropagation();
         const rect = el.getBoundingClientRect(); const startX = e.clientX, startY = e.clientY, left = rect.left, top = rect.top;
         const move = ev => {
           if (ev.pointerId !== e.pointerId) return;
-          const x = THREE.MathUtils.clamp(left + ev.clientX - startX, 0, Math.max(0, innerWidth - rect.width));
-          const y = THREE.MathUtils.clamp(top + ev.clientY - startY, 0, Math.max(0, innerHeight - rect.height));
+          const current = el.getBoundingClientRect();
+          const x = THREE.MathUtils.clamp(left + ev.clientX - startX, 0, Math.max(0, innerWidth - current.width));
+          const y = THREE.MathUtils.clamp(top + ev.clientY - startY, 0, Math.max(0, innerHeight - current.height));
           el.style.left = x + 'px'; el.style.top = y + 'px'; el.style.right = 'auto'; el.style.bottom = 'auto';
           this.controlPositions[key] = { x: x / innerWidth, y: y / innerHeight };
         };
@@ -241,6 +287,6 @@ export class InvisiblePlayerController {
     this.camera.lookAt(eye.clone().add(direction));
   }
   dispose() {
-    window.removeEventListener('resize', this._resize); this.stick?.remove(); this.runButton?.remove(); this.jumpButton?.remove(); this.slideButton?.remove(); this.joystickStyle?.remove(); this.settingsButton?.remove(); this.settingsStyle?.remove(); this.settingsBackdrop?.remove(); document.querySelector('.city-layout-hint')?.remove(); this.scene.remove(this.collider);
+    window.removeEventListener('resize', this._resize); this.stick?.remove(); this.runButton?.remove(); this.jumpButton?.remove(); this.slideButton?.remove(); this.joystickStyle?.remove(); this.settingsButton?.remove(); this.settingsStyle?.remove(); this.settingsBackdrop?.remove(); document.querySelector('.city-layout-hint')?.remove(); this.layoutEditor?.remove(); this.layoutEditor = null; this.scene.remove(this.collider);
   }
 }
