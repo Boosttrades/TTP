@@ -13,8 +13,10 @@ export class InvisiblePlayerController {
     this.radius = 0.32; this.height = 1.7;
     this.input = { x: 0, y: 0, run: false, jump: false, slide: false };
     this.yaw = 0; this.pitch = -0.04; this.lookPointer = null; this.lastPointer = null;
+    this.lookSensitivity = 1; this.layoutMode = false; this.controlScale = { stick: 1, run: 1, jump: 1, slide: 1 }; this.controlPositions = {};
+    this._loadControlSettings();
     this.raycaster = new THREE.Raycaster(); this.raycaster.near = 0; this.raycaster.far = this.radius + 0.12;
-    this._makeCollider(); this._makeJoystick(); this._bindLook(); this._bindKeys(); this._bindButtons();
+    this._makeCollider(); this._makeJoystick(); this._bindLook(); this._bindKeys(); this._bindButtons(); this._makeSettings();
     this._resize = () => this._positionJoystick(); window.addEventListener('resize', this._resize);
     this._positionJoystick(); this._updateCamera(0);
   }
@@ -33,6 +35,134 @@ export class InvisiblePlayerController {
     const end = e => { if (e.pointerId !== this.stickPointer) return; this.stickPointer = null; this.input.x = this.input.y = 0; this.knob.style.transform = 'translate(0px,0px)'; };
     this.stick.addEventListener('pointerup', end); this.stick.addEventListener('pointercancel', end);
   }
+  _loadControlSettings() {
+    try {
+      const saved = JSON.parse(localStorage.getItem('cityGameControlsV1') || '{}');
+      if (Number.isFinite(saved.sensitivity)) this.lookSensitivity = THREE.MathUtils.clamp(saved.sensitivity, 0.4, 2.5);
+      if (saved.scale && typeof saved.scale === 'object') {
+        for (const key of Object.keys(this.controlScale)) if (Number.isFinite(saved.scale[key])) this.controlScale[key] = THREE.MathUtils.clamp(saved.scale[key], 0.65, 1.6);
+      }
+      if (saved.positions && typeof saved.positions === 'object') this.controlPositions = saved.positions;
+    } catch {}
+  }
+  _saveControlSettings() {
+    try { localStorage.setItem('cityGameControlsV1', JSON.stringify({ sensitivity: this.lookSensitivity, scale: this.controlScale, positions: this.controlPositions })); } catch {}
+  }
+  _makeSettings() {
+    const style = document.createElement('style');
+    style.textContent = `
+      .city-settings-button{position:fixed;top:14px;left:14px;z-index:1200;border:1px solid #ffffff80;border-radius:12px;background:#122333dc;color:#fff;padding:10px 14px;font:700 14px system-ui;box-shadow:0 5px 18px #0003;touch-action:manipulation}
+      .city-settings-backdrop{position:fixed;inset:0;z-index:2200;background:#07131dcc;display:flex;align-items:center;justify-content:center;padding:16px;font:14px system-ui;color:#f4f8fb}
+      .city-settings-panel{width:min(430px,100%);max-height:90dvh;overflow:auto;background:#142635;border:1px solid #527082;border-radius:18px;padding:18px;box-shadow:0 20px 60px #0008}
+      .city-settings-panel h2{margin:0 0 14px;font-size:21px}.city-settings-panel h3{font-size:15px;margin:18px 0 8px}
+      .city-settings-panel label{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:10px 0}
+      .city-settings-panel input[type=range]{width:100%;accent-color:#8ce5c0}
+      .city-settings-panel select,.city-settings-panel button{border:1px solid #718999;border-radius:9px;padding:9px 11px;background:#203a4a;color:white;font:600 13px system-ui}
+      .city-settings-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.city-settings-row button.primary{background:#8ce5c0;color:#10332b;border-color:#8ce5c0}
+      .city-settings-note{font-size:12px;line-height:1.45;color:#bed0d9;margin:8px 0}
+      .city-layout-active{outline:3px dashed #8ce5c0!important;outline-offset:3px;touch-action:none!important}
+      .city-layout-hint{position:fixed;left:50%;top:62px;transform:translateX(-50%);z-index:1500;background:#10332beF;color:#fff;padding:9px 12px;border-radius:10px;font:700 12px system-ui;pointer-events:none;white-space:nowrap}
+    `;
+    document.head.appendChild(style); this.settingsStyle = style;
+    this.settingsButton = document.createElement('button');
+    this.settingsButton.className = 'city-settings-button'; this.settingsButton.textContent = '⚙ Settings';
+    this.settingsButton.addEventListener('click', () => this._openSettings());
+    document.body.appendChild(this.settingsButton);
+    this._applyControlLayout();
+  }
+  _controlElements() {
+    return { stick: this.stick, run: this.runButton, jump: this.jumpButton, slide: this.slideButton };
+  }
+  _applyControlLayout() {
+    const elements = this._controlElements();
+    for (const [key, el] of Object.entries(elements)) {
+      if (!el) continue;
+      el.style.transformOrigin = 'center center';
+      el.style.scale = String(this.controlScale[key] || 1);
+      const pos = this.controlPositions[key];
+      if (pos && Number.isFinite(pos.x) && Number.isFinite(pos.y)) {
+        el.style.left = (pos.x * 100) + 'vw'; el.style.top = (pos.y * 100) + 'vh';
+        el.style.right = 'auto'; el.style.bottom = 'auto';
+      } else {
+        el.style.left = ''; el.style.top = ''; el.style.right = ''; el.style.bottom = '';
+      }
+    }
+    this._positionJoystick();
+  }
+  _openSettings() {
+    if (this.settingsBackdrop) return;
+    const backdrop = document.createElement('div'); backdrop.className = 'city-settings-backdrop';
+    backdrop.innerHTML = `<section class="city-settings-panel" role="dialog" aria-modal="true" aria-label="Game settings">
+      <h2>Game Settings</h2>
+      <h3>Screen sensitivity</h3>
+      <label for="city-sensitivity"><span>Look sensitivity</span><strong id="city-sensitivity-value"></strong></label>
+      <input id="city-sensitivity" type="range" min="0.4" max="2.5" step="0.1">
+      <p class="city-settings-note">Adjust how quickly the camera turns when you drag the screen. Changes apply immediately and are saved on this device.</p>
+      <h3>Layout settings</h3>
+      <p class="city-settings-note">Choose a control, adjust its size, then enter layout mode and drag controls to where you want them.</p>
+      <label for="city-layout-control"><span>Control</span><select id="city-layout-control"><option value="stick">Movement joystick</option><option value="run">Run button</option><option value="jump">Jump button</option><option value="slide">Slide button</option></select></label>
+      <label for="city-control-size"><span>Control size</span><strong id="city-control-size-value"></strong></label>
+      <input id="city-control-size" type="range" min="0.65" max="1.6" step="0.05">
+      <div class="city-settings-row"><button id="city-layout-toggle" class="primary">Arrange controls</button><button id="city-layout-reset">Reset layout</button></div>
+      <p class="city-settings-note" id="city-layout-status">Layout mode is off.</p>
+      <div class="city-settings-row"><button id="city-settings-close" class="primary">Done</button></div>
+    </section>`;
+    document.body.appendChild(backdrop); this.settingsBackdrop = backdrop;
+    const q = id => backdrop.querySelector('#' + id);
+    const sens = q('city-sensitivity'), size = q('city-control-size'), select = q('city-layout-control');
+    sens.value = String(this.lookSensitivity); size.value = String(this.controlScale[select.value]);
+    const updateSensitivity = () => { this.lookSensitivity = Number(sens.value); q('city-sensitivity-value').textContent = this.lookSensitivity.toFixed(1) + '×'; this._saveControlSettings(); };
+    const updateSize = () => { const key = select.value; this.controlScale[key] = Number(size.value); q('city-control-size-value').textContent = Math.round(this.controlScale[key] * 100) + '%'; this._applyControlLayout(); this._saveControlSettings(); };
+    const updateSelectedSize = () => { size.value = String(this.controlScale[select.value]); updateSize(); };
+    sens.addEventListener('input', updateSensitivity); size.addEventListener('input', updateSize); select.addEventListener('change', updateSelectedSize);
+    q('city-layout-toggle').addEventListener('click', () => {
+      this.layoutMode = !this.layoutMode;
+      q('city-layout-toggle').textContent = this.layoutMode ? 'Finish arranging' : 'Arrange controls';
+      q('city-layout-status').textContent = this.layoutMode ? 'Drag any outlined control to reposition it.' : 'Layout mode is off.';
+      this._setLayoutMode();
+    });
+    q('city-layout-reset').addEventListener('click', () => {
+      this.controlPositions = {}; this.controlScale = { stick: 1, run: 1, jump: 1, slide: 1 };
+      this._applyControlLayout(); updateSelectedSize(); this._saveControlSettings();
+    });
+    q('city-settings-close').addEventListener('click', () => this._closeSettings());
+    backdrop.addEventListener('click', e => { if (e.target === backdrop) this._closeSettings(); });
+    updateSensitivity(); updateSelectedSize();
+  }
+  _setLayoutMode() {
+    const elements = this._controlElements();
+    const hint = document.querySelector('.city-layout-hint');
+    if (this.layoutMode && !hint) { const h = document.createElement('div'); h.className = 'city-layout-hint'; h.textContent = 'Drag controls to move them'; document.body.appendChild(h); }
+    if (!this.layoutMode) document.querySelector('.city-layout-hint')?.remove();
+    for (const [key, el] of Object.entries(elements)) {
+      if (!el) continue;
+      el.classList.toggle('city-layout-active', this.layoutMode);
+      if (el.dataset.layoutBound) continue;
+      el.dataset.layoutBound = '1';
+      el.addEventListener('pointerdown', e => {
+        if (!this.layoutMode) return;
+        e.preventDefault(); e.stopPropagation(); el.setPointerCapture?.(e.pointerId);
+        const rect = el.getBoundingClientRect(); const startX = e.clientX, startY = e.clientY, left = rect.left, top = rect.top;
+        const move = ev => {
+          if (ev.pointerId !== e.pointerId) return;
+          const x = THREE.MathUtils.clamp(left + ev.clientX - startX, 0, Math.max(0, innerWidth - rect.width));
+          const y = THREE.MathUtils.clamp(top + ev.clientY - startY, 0, Math.max(0, innerHeight - rect.height));
+          el.style.left = x + 'px'; el.style.top = y + 'px'; el.style.right = 'auto'; el.style.bottom = 'auto';
+          this.controlPositions[key] = { x: x / innerWidth, y: y / innerHeight };
+        };
+        const finish = ev => {
+          if (ev.pointerId !== e.pointerId) return;
+          window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', finish);
+          this._saveControlSettings();
+        };
+        window.addEventListener('pointermove', move); window.addEventListener('pointerup', finish);
+      });
+    }
+  }
+  _closeSettings() {
+    this.layoutMode = false; this._setLayoutMode();
+    this.settingsBackdrop?.remove(); this.settingsBackdrop = null;
+  }
   _positionJoystick() {}
   _moveStick(e) {
     const rect = this.stick.getBoundingClientRect(), cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
@@ -47,7 +177,7 @@ export class InvisiblePlayerController {
     window.addEventListener('pointermove', e => {
       if (e.pointerId !== this.lookPointer || !this.lastPointer) return;
       const dx = e.clientX - this.lastPointer.x, dy = e.clientY - this.lastPointer.y; this.lastPointer = { x: e.clientX, y: e.clientY };
-      this.yaw -= dx * 0.004; this.pitch = THREE.MathUtils.clamp(this.pitch - dy * 0.003, -0.8, 0.35);
+      this.yaw -= dx * 0.004 * this.lookSensitivity; this.pitch = THREE.MathUtils.clamp(this.pitch - dy * 0.003 * this.lookSensitivity, -0.8, 0.35);
     });
     const end = e => { if (e.pointerId === this.lookPointer) { this.lookPointer = null; this.lastPointer = null; } };
     window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
@@ -111,6 +241,6 @@ export class InvisiblePlayerController {
     this.camera.lookAt(eye.clone().add(direction));
   }
   dispose() {
-    window.removeEventListener('resize', this._resize); this.stick?.remove(); this.runButton?.remove(); this.jumpButton?.remove(); this.slideButton?.remove(); this.joystickStyle?.remove(); this.scene.remove(this.collider);
+    window.removeEventListener('resize', this._resize); this.stick?.remove(); this.runButton?.remove(); this.jumpButton?.remove(); this.slideButton?.remove(); this.joystickStyle?.remove(); this.settingsButton?.remove(); this.settingsStyle?.remove(); this.settingsBackdrop?.remove(); document.querySelector('.city-layout-hint')?.remove(); this.scene.remove(this.collider);
   }
 }
