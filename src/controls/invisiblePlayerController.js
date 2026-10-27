@@ -247,6 +247,22 @@ export class InvisiblePlayerController {
   }
   _blockedAt(candidate, movement) {
     if (!this.city || movement.lengthSq() < 1e-10) return false;
+
+    // Hard-stop against the actual perimeter wall volumes as well as raycast hits.
+    // The old ray-only test could miss a thin wall between frames on some mobile devices.
+    const boundaryWalls = [];
+    this.city.traverse(node => {
+      if (node.isMesh && node.name === 'InvisibleSolidWorldBoundary') boundaryWalls.push(node);
+    });
+    const probe = new THREE.Vector3(candidate.x, candidate.y + this.height / 2, candidate.z);
+    for (const wall of boundaryWalls) {
+      const box = new THREE.Box3().setFromObject(wall);
+      if (probe.x + this.radius > box.min.x && probe.x - this.radius < box.max.x &&
+          probe.z + this.radius > box.min.z && probe.z - this.radius < box.max.z) {
+        return true;
+      }
+    }
+
     const direction = movement.clone().setY(0).normalize();
     const start = new THREE.Vector3(candidate.x - movement.x, candidate.y, candidate.z - movement.z);
     const reach = this.radius + movement.length() + 0.1;
