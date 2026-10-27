@@ -31,8 +31,8 @@ const errorBox = document.querySelector('#error');
 const help = document.createElement('div'); help.id = 'help'; help.textContent = 'Drag to look Â· joystick to move Â· RUN / JUMP'; document.body.appendChild(help);
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xb8c6cc);
-scene.fog = new THREE.Fog(0xb8c6cc, 28, 205);
+scene.background = new THREE.Color(0x83c4f2);
+scene.fog = new THREE.Fog(0xc6dce8, 28, 205);
 const camera = new THREE.PerspectiveCamera(95, innerWidth / innerHeight, 0.1, 420);
 const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.5));
