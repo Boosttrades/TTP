@@ -108,9 +108,12 @@ export function loadDenseCity(scene, {
           wall.position.set(x, y, z);
           city.add(wall);
         }
-        // Four distant copies are visual-only; the collision controller only checks the main city.
-        const gap = Math.max(2, Math.min(w, d) * 0.06); // Small positive gap: copies feel connected, but do not overlap the main city.
-        const offsets = [[-(w + gap), 0, -(d + gap)], [w + gap, 0, -(d + gap)], [-(w + gap), 0, d + gap], [w + gap, 0, d + gap]];
+        // Tile scenery directly against every side of the playable city so there is no visible gap.
+        // The main city's invisible perimeter walls remain in place, so the player cannot enter these tiles.
+        const offsets = [
+          [-w, 0, 0], [w, 0, 0], [0, 0, -d], [0, 0, d],
+          [-w, 0, -d], [w, 0, -d], [-w, 0, d], [w, 0, d],
+        ];
         offsets.forEach((offset, index) => {
           const mirage = city.clone(true);
           const boundaryMeshes = [];
@@ -123,14 +126,8 @@ export function loadDenseCity(scene, {
             node.castShadow = false;
             node.receiveShadow = false;
             node.material = Array.isArray(node.material) ? node.material.map(mat => mat?.clone()) : node.material?.clone();
-            const mats = Array.isArray(node.material) ? node.material : [node.material];
-            for (const mat of mats) {
-              if (!mat) continue;
-              mat.transparent = true;
-              mat.opacity = Math.min(mat.opacity ?? 1, 0.58);
-              mat.depthWrite = false;
-              mat.needsUpdate = true;
-            }
+            // Keep scenery materials fully opaque; fog in the main scene should soften the
+            // far edges naturally instead of making the adjacent city tiles look like ghosts.
           });
           scene.add(mirage);
         });
