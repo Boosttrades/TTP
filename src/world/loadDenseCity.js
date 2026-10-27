@@ -140,20 +140,23 @@ export function loadDenseCity(scene, {
           const materials = Array.isArray(object.material) ? object.material : [object.material];
           for (const material of materials) {
             if (!material) continue;
-            const name = (material.name || object.name || '').toLowerCase();
-            const wallLike = /wall|building|concrete|plaster|brick|facade|stucco|cement/.test(name);
+            const name = `${material.name || ''} ${object.name || ''}`.toLowerCase();
+            const wallLike = /wall|building|concrete|plaster|brick|facade|stucco|cement|masonry|exterior|structure/.test(name);
             if (material.color) {
               const c = material.color;
               const brightness = (c.r * 0.2126 + c.g * 0.7152 + c.b * 0.0722);
               // Gently lift neutral wall finishes toward pale, sun-faded concrete without recolouring props.
-              if ((wallLike || brightness > 0.18) && brightness > 0.18) {
-                c.lerp(new THREE.Color(0xe2ddd3), wallLike ? 0.48 : 0.12);
-                material.roughness = Math.max(material.roughness ?? 0.8, 0.82);
-                material.metalness = Math.min(material.metalness ?? 0, 0.08);
-                if (!material.bumpMap) {
-                  material.bumpMap = crackedPlaster;
-                  material.bumpScale = 0.075;
-                }
+              const saturation = Math.max(c.r, c.g, c.b) - Math.min(c.r, c.g, c.b);
+              const likelyPlaster = wallLike || (brightness > 0.34 && saturation < 0.12 &&
+                !/glass|window|door|roof|metal|leaf|plant|wood|road|asphalt|sign|light|frame|trim/.test(name));
+              if (likelyPlaster) {
+                // Apply to existing maps too: many GLB materials already have a bump map,
+                // which previously prevented the cracked-plaster detail from appearing.
+                if (wallLike) c.lerp(new THREE.Color(0xe2ddd3), 0.34);
+                material.roughness = Math.max(material.roughness ?? 0.8, 0.92);
+                material.metalness = Math.min(material.metalness ?? 0, 0.04);
+                material.bumpMap = crackedPlaster;
+                material.bumpScale = wallLike ? 0.11 : 0.055;
                 material.needsUpdate = true;
               }
             }
