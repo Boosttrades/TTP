@@ -97,10 +97,10 @@ export function loadDenseCity(scene, {
         const w = Math.max(size.x, 24), d = Math.max(size.z, 24), h = Math.max(55, size.y + 40);
         const barrierMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, depthWrite: false, side: THREE.DoubleSide });
         const specs = [
-          [center.x, bounds.min.y + h / 2, bounds.min.z - d / 2 - 1, w + 4, h, 1],
-          [center.x, bounds.min.y + h / 2, bounds.max.z + d / 2 + 1, w + 4, h, 1],
-          [bounds.min.x - w / 2 - 1, bounds.min.y + h / 2, center.z, 1, h, d + 4],
-          [bounds.max.x + w / 2 + 1, bounds.min.y + h / 2, center.z, 1, h, d + 4]
+          [center.x, bounds.min.y + h / 2, bounds.min.z - 1, w + 4, h, 1],
+          [center.x, bounds.min.y + h / 2, bounds.max.z + 1, w + 4, h, 1],
+          [bounds.min.x - 1, bounds.min.y + h / 2, center.z, 1, h, d + 4],
+          [bounds.max.x + 1, bounds.min.y + h / 2, center.z, 1, h, d + 4]
         ];
         for (const [x, y, z, bw, bh, bd] of specs) {
           const wall = new THREE.Mesh(new THREE.BoxGeometry(bw, bh, bd), barrierMat);
