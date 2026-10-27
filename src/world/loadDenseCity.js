@@ -12,39 +12,109 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 function makeCrackedPlasterBump() {
   const canvas = document.createElement('canvas');
-  canvas.width = canvas.height = 256;
+  canvas.width = canvas.height = 512;
   const ctx = canvas.getContext('2d');
-  ctx.fillStyle = '#808080';
-  ctx.fillRect(0, 0, 256, 256);
-  // Fine, low-contrast branching hairline cracks for worn plaster walls.
-  ctx.strokeStyle = '#4e4e4e';
-  ctx.lineWidth = 1.1;
-  const cracks = [
-    [[24, 4], [31, 26], [23, 42], [38, 60], [35, 81]],
-    [[31, 26], [49, 35], [57, 52]],
-    [[128, 0], [120, 18], [132, 34], [119, 51], [126, 72], [111, 89]],
-    [[132, 34], [151, 43], [158, 59]],
-    [[211, 9], [203, 28], [218, 45], [209, 66], [225, 83]],
-    [[203, 28], [185, 38], [179, 53]],
-    [[62, 117], [78, 132], [69, 151], [83, 169], [76, 192], [91, 214]],
-    [[78, 132], [99, 124], [110, 139]],
-    [[166, 105], [153, 123], [166, 142], [155, 161], [170, 181], [163, 202]],
-    [[153, 123], [135, 115], [126, 130]],
-    [[226, 150], [211, 169], [223, 188], [208, 209], [217, 235]],
-    [[211, 169], [193, 158], [181, 172]],
-    [[18, 223], [35, 207], [28, 190], [42, 177]],
+  // A fine plaster grain prevents walls from looking like smooth, flat plastic.
+  const image = ctx.createImageData(512, 512);
+  for (let i = 0; i < image.data.length; i += 4) {
+    const grain = 116 + Math.random() * 24;
+    image.data[i] = image.data[i + 1] = image.data[i + 2] = grain;
+    image.data[i + 3] = 255;
+  }
+  ctx.putImageData(image, 0, 0);
+  // Irregular branching hairline cracks, with a few deeper fracture segments.
+  const paths = [
+    [[18,0],[30,34],[22,58],[42,81],[37,112],[54,137]],
+    [[30,34],[55,45],[70,66]], [[22,58],[7,77]],
+    [[119,0],[107,31],[126,55],[111,82],[124,111],[101,138]],
+    [[126,55],[153,67],[166,91]], [[111,82],[88,91],[80,112]],
+    [[246,0],[232,29],[251,53],[238,83],[258,106]],
+    [[232,29],[209,43],[198,66]], [[238,83],[266,93]],
+    [[344,0],[330,28],[348,53],[334,79],[351,105],[339,131]],
+    [[348,53],[375,63],[388,87]], [[334,79],[310,89],[302,111]],
+    [[455,14],[438,39],[455,64],[440,91],[461,118]],
+    [[438,39],[414,49],[401,70]], [[440,91],[418,107]],
+    [[45,210],[67,231],[55,257],[76,283],[68,316],[89,342]],
+    [[67,231],[91,221],[109,239]], [[55,257],[34,270]],
+    [[180,190],[162,216],[181,241],[165,268],[185,296],[176,327]],
+    [[181,241],[208,253],[220,277]], [[165,268],[140,280],[130,301]],
+    [[300,205],[281,230],[301,254],[286,281],[307,307],[296,338]],
+    [[301,254],[326,265],[340,286]], [[286,281],[263,293]],
+    [[410,211],[392,236],[411,259],[396,286],[416,311],[404,339]],
+    [[411,259],[438,271],[450,292]], [[396,286],[372,298]],
+    [[19,405],[40,382],[33,356],[52,336]], [[40,382],[63,395],[78,416]],
+    [[151,414],[169,388],[158,362],[178,341]], [[169,388],[193,402],[207,424]],
+    [[276,420],[295,396],[284,370],[303,350]], [[295,396],[318,410]],
+    [[433,420],[451,397],[440,371],[460,349]], [[451,397],[475,408]]
   ];
-  for (const path of cracks) {
+  ctx.lineCap = 'round';
+  for (const path of paths) {
+    ctx.strokeStyle = 'rgba(48,45,39,0.72)';
+    ctx.lineWidth = 1.8;
     ctx.beginPath();
     ctx.moveTo(path[0][0], path[0][1]);
     for (let i = 1; i < path.length; i++) ctx.lineTo(path[i][0], path[i][1]);
     ctx.stroke();
+    // Hairline edge highlights give the fractures a shallow, chipped-plaster relief.
+    ctx.strokeStyle = 'rgba(224,216,201,0.7)';
+    ctx.lineWidth = 0.8;
+    ctx.stroke();
+  }
+  // Subtle, broken-up weather staining rather than a uniform wall finish.
+  for (let i = 0; i < 90; i++) {
+    const x = Math.random() * 512, y = Math.random() * 512;
+    const radius = 2 + Math.random() * 13;
+    ctx.fillStyle = i % 3 ? 'rgba(82,91,74,0.08)' : 'rgba(104,82,62,0.07)';
+    ctx.beginPath();
+    ctx.ellipse(x, y, radius, radius * (1.2 + Math.random()), Math.random(), 0, Math.PI * 2);
+    ctx.fill();
   }
   const texture = new THREE.CanvasTexture(canvas);
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(1.5, 1.5);
+  texture.repeat.set(1.8, 1.8);
   texture.colorSpace = THREE.NoColorSpace;
   return texture;
+}
+
+function addFacadeIvy(mesh, index) {
+  if (!mesh.geometry.boundingBox) mesh.geometry.computeBoundingBox();
+  const b = mesh.geometry.boundingBox;
+  if (!b) return;
+  const width = b.max.x - b.min.x, height = b.max.y - b.min.y, depth = b.max.z - b.min.z;
+  if (height < 2.4 || width < 1.8 || height < width * 0.65) return;
+  // Only a portion of facade pieces receive ivy, so greenery feels naturally irregular.
+  if (index % 4 !== 0) return;
+  const leafMaterials = [
+    new THREE.MeshStandardMaterial({ color: 0x365d32, roughness: 0.92, side: THREE.DoubleSide }),
+    new THREE.MeshStandardMaterial({ color: 0x527b3d, roughness: 0.9, side: THREE.DoubleSide }),
+    new THREE.MeshStandardMaterial({ color: 0x78914a, roughness: 0.92, side: THREE.DoubleSide })
+  ];
+  const leafShape = new THREE.Shape();
+  leafShape.moveTo(0, 0);
+  leafShape.quadraticCurveTo(0.12, 0.2, 0, 0.34);
+  leafShape.quadraticCurveTo(-0.13, 0.19, 0, 0);
+  const leafGeo = new THREE.ShapeGeometry(leafShape);
+  const vine = new THREE.Group();
+  vine.name = 'NaturalFacadeIvy';
+  const faceZ = depth > 0.12 ? b.max.z + 0.025 : b.max.z + 0.015;
+  const count = Math.max(10, Math.min(28, Math.floor(height * 2.2)));
+  for (let i = 0; i < count; i++) {
+    const t = (i + 0.5) / count;
+    const x = b.min.x + width * (0.18 + 0.64 * (0.5 + 0.5 * Math.sin(t * 8 + index)));
+    const y = b.min.y + height * t;
+    const stem = new THREE.Mesh(new THREE.BoxGeometry(0.025, height / count * 1.5, 0.018),
+      new THREE.MeshStandardMaterial({ color: 0x465c30, roughness: 1 }));
+    stem.position.set(x, y, faceZ);
+    vine.add(stem);
+    for (const side of [-1, 1]) {
+      const leaf = new THREE.Mesh(leafGeo, leafMaterials[(i + (side > 0 ? 1 : 0)) % leafMaterials.length]);
+      leaf.position.set(x + side * (0.06 + (i % 3) * 0.025), y + (side * 0.04), faceZ + 0.02);
+      leaf.rotation.z = side * (0.5 + (i % 4) * 0.2);
+      leaf.scale.setScalar(0.45 + (i % 4) * 0.13);
+      vine.add(leaf);
+    }
+  }
+  mesh.add(vine);
 }
 
 export function loadDenseCity(scene, {
@@ -82,7 +152,7 @@ export function loadDenseCity(scene, {
                 material.metalness = Math.min(material.metalness ?? 0, 0.08);
                 if (!material.bumpMap) {
                   material.bumpMap = crackedPlaster;
-                  material.bumpScale = 0.045;
+                  material.bumpScale = 0.075;
                 }
                 material.needsUpdate = true;
               }
