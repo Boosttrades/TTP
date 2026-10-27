@@ -1,19 +1,7 @@
-# Separated city environment pack
+# Separated FPS city assets
 
-The separated asset pack is generated from `public/assets/dense_tightly_packed_city.glb`.
+Generated from `dense_tightly_packed_city.glb` using the actual GLB scene graph. Each source node is exported to its own GLB and its original transform is baked into the vertices, preserving the object's exact world placement when loaded at identity transform.
 
-Download the generated pack from the ChatGPT conversation and extract its `fps_city_separated_assets/` contents into the repository at `public/assets/separated/`, preserving the category folders and `manifest.json`.
+Categories: buildings, containers, doors, ground, other. The manifest contains stable IDs, original node names, paths, and bounds.
 
-Expected layout:
-
-- `public/assets/separated/manifest.json`
-- `public/assets/separated/buildings/*.glb`
-- `public/assets/separated/containers/*.glb`
-- `public/assets/separated/doors/*.glb`
-- `public/assets/separated/ground/*.glb`
-
-The pack contains 86 source objects (60 building meshes/parts, 3 containers, 20 doors, and 3 ground/alley objects). The source GLB's geometry already contains its city-space placement, so the extracted meshes keep that placement baked into their vertices and the manifest uses identity transforms. Keep this convention when swapping an asset, or update its manifest transform accordingly.
-
-## Safe rollout
-
-`src/world/loadSeparatedCity.js` is opt-in and is not wired into the active game. It checks that every manifest entry loads, and falls back to `loadDenseCity.js` if the pack is unavailable. Do not switch the active game loader until the separated files are present and visual/collision parity has been checked.
+Important: do not replace a GLB with a centered-origin model without updating its geometry/origin convention; this pack preserves placement by baking original city coordinates into each mesh. For easier future swaps, keep each replacement's vertices in the same city coordinate space or update the manifest transform. The original combined GLB remains the production fallback.

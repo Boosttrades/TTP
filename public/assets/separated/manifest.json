@@ -1,0 +1,2932 @@
+{
+  "version": 1,
+  "source": "/assets/dense_tightly_packed_city.glb",
+  "coordinateSpace": "original city coordinates baked into each asset geometry",
+  "assetCount": 86,
+  "assets": [
+    {
+      "id": "container2_shipping-container-a",
+      "sourceNode": "container2_shipping-container-a",
+      "category": "containers",
+      "url": "/assets/separated/containers/000_container2_shipping-container-a.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          7.809998989105225,
+          2.5397421943296195e-09,
+          3.9766664505004883
+        ],
+        [
+          9.1899995803833,
+          1.2891850471496582,
+          7.023333549499512
+        ]
+      ],
+      "sourceIndex": 0
+    },
+    {
+      "id": "container1_shipping-container-a",
+      "sourceNode": "container1_shipping-container-a",
+      "category": "containers",
+      "url": "/assets/separated/containers/001_container1_shipping-container-a.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          7.809998989105225,
+          2.5397421943296195e-09,
+          -7.023333549499512
+        ],
+        [
+          9.1899995803833,
+          1.2891850471496582,
+          -3.9766664505004883
+        ]
+      ],
+      "sourceIndex": 1
+    },
+    {
+      "id": "container0_shipping-container-a",
+      "sourceNode": "container0_shipping-container-a",
+      "category": "containers",
+      "url": "/assets/separated/containers/002_container0_shipping-container-a.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -9.690000534057617,
+          2.5397421943296195e-09,
+          3.9766664505004883
+        ],
+        [
+          -8.3100004196167,
+          1.2891850471496582,
+          7.023333549499512
+        ]
+      ],
+      "sourceIndex": 2
+    },
+    {
+      "id": "alley_1",
+      "sourceNode": "alley_1",
+      "category": "ground",
+      "url": "/assets/separated/ground/003_alley_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          4.425000190734863,
+          -0.007499999832361937,
+          -7.75
+        ],
+        [
+          5.074999809265137,
+          0.017500000074505806,
+          7.75
+        ]
+      ],
+      "sourceIndex": 3
+    },
+    {
+      "id": "alley_0",
+      "sourceNode": "alley_0",
+      "category": "ground",
+      "url": "/assets/separated/ground/004_alley_0.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -0.824999988079071,
+          -0.007499999832361937,
+          -7.75
+        ],
+        [
+          -0.17499999701976776,
+          0.017500000074505806,
+          7.75
+        ]
+      ],
+      "sourceIndex": 4
+    },
+    {
+      "id": "paved_city_ground",
+      "sourceNode": "paved_city_ground",
+      "category": "ground",
+      "url": "/assets/separated/ground/005_paved_city_ground.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -10.0,
+          -0.1899999976158142,
+          -8.0
+        ],
+        [
+          10.0,
+          -0.009999999776482582,
+          8.0
+        ]
+      ],
+      "sourceIndex": 5
+    },
+    {
+      "id": "4_5_building-j_1",
+      "sourceNode": "4_5_building-j_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/006_4_5_building-j_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          6.758205890655518,
+          0.6499999761581421,
+          4.625999927520752
+        ],
+        [
+          6.758205890655518,
+          0.699999988079071,
+          4.826000213623047
+        ]
+      ],
+      "sourceIndex": 6
+    },
+    {
+      "id": "4_5_building-j",
+      "sourceNode": "4_5_building-j",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/007_4_5_building-j.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          5.921584129333496,
+          1.2993813636148028e-16,
+          4.076000213623047
+        ],
+        [
+          6.948205947875977,
+          0.8611457943916321,
+          5.375999927520752
+        ]
+      ],
+      "sourceIndex": 7
+    },
+    {
+      "id": "iron_door_4_4",
+      "sourceNode": "iron_door_4_4",
+      "category": "doors",
+      "url": "/assets/separated/doors/008_iron_door_4_4.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          3.375,
+          0.014999999664723873,
+          5.926499843597412
+        ],
+        [
+          3.625,
+          0.39500001072883606,
+          5.971499919891357
+        ]
+      ],
+      "sourceIndex": 8
+    },
+    {
+      "id": "4_4_building-i_1",
+      "sourceNode": "4_4_building-i_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/009_4_4_building-i_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          2.821794033050537,
+          0.019999999552965164,
+          4.694000244140625
+        ],
+        [
+          3.4117939472198486,
+          0.25,
+          4.694000244140625
+        ]
+      ],
+      "sourceIndex": 9
+    },
+    {
+      "id": "4_4_building-i",
+      "sourceNode": "4_4_building-i",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/010_4_4_building-i.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          2.5517940521240234,
+          1.2993810989170068e-16,
+          4.624000072479248
+        ],
+        [
+          3.5799317359924316,
+          0.7335410118103027,
+          5.923999786376953
+        ]
+      ],
+      "sourceIndex": 10
+    },
+    {
+      "id": "iron_door_4_3",
+      "sourceNode": "iron_door_4_3",
+      "category": "doors",
+      "url": "/assets/separated/doors/011_iron_door_4_3.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          0.8413929343223572,
+          0.014999999664723873,
+          5.936500072479248
+        ],
+        [
+          1.1586071252822876,
+          0.39500001072883606,
+          5.981500148773193
+        ]
+      ],
+      "sourceIndex": 11
+    },
+    {
+      "id": "4_3_building-h_1",
+      "sourceNode": "4_3_building-h_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/012_4_3_building-h_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -0.07820618152618408,
+          0.14999999105930328,
+          5.093999862670898
+        ],
+        [
+          0.12179386615753174,
+          0.25,
+          5.854000091552734
+        ]
+      ],
+      "sourceIndex": 12
+    },
+    {
+      "id": "4_3_building-h",
+      "sourceNode": "4_3_building-h",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/013_4_3_building-h.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -0.24179399013519287,
+          -4.113470665706529e-15,
+          4.624000072479248
+        ],
+        [
+          1.0799317359924316,
+          0.7335410118103027,
+          5.934000015258789
+        ]
+      ],
+      "sourceIndex": 13
+    },
+    {
+      "id": "4_2_building-g_1",
+      "sourceNode": "4_2_building-g_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/014_4_2_building-g_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -2.7990691661834717,
+          0.14999999105930328,
+          4.441793918609619
+        ],
+        [
+          -1.3190691471099854,
+          1.0499999523162842,
+          5.521794319152832
+        ]
+      ],
+      "sourceIndex": 14
+    },
+    {
+      "id": "4_2_building-g",
+      "sourceNode": "4_2_building-g",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/015_4_2_building-g.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -2.839069128036499,
+          -5.551042736584577e-09,
+          4.358205795288086
+        ],
+        [
+          -1.160930871963501,
+          1.28000009059906,
+          5.641794204711914
+        ]
+      ],
+      "sourceIndex": 15
+    },
+    {
+      "id": "iron_door_4_1",
+      "sourceNode": "iron_door_4_1",
+      "category": "doors",
+      "url": "/assets/separated/doors/016_iron_door_4_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -4.710000038146973,
+          0.014999999664723873,
+          5.896500110626221
+        ],
+        [
+          -4.289999961853027,
+          0.6349999904632568,
+          5.941500186920166
+        ]
+      ],
+      "sourceIndex": 16
+    },
+    {
+      "id": "4_1_building-f_1",
+      "sourceNode": "4_1_building-f_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/017_4_1_building-f_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -5.658205986022949,
+          0.019999999552965164,
+          4.694000244140625
+        ],
+        [
+          -4.178205966949463,
+          1.0660450458526611,
+          5.620642185211182
+        ]
+      ],
+      "sourceIndex": 17
+    },
+    {
+      "id": "4_1_building-f",
+      "sourceNode": "4_1_building-f",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/018_4_1_building-f.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -5.848206520080566,
+          -3.609556789341316e-16,
+          4.613999843597412
+        ],
+        [
+          -4.058206081390381,
+          1.9249999523162842,
+          5.894000053405762
+        ]
+      ],
+      "sourceIndex": 18
+    },
+    {
+      "id": "iron_door_4_0",
+      "sourceNode": "iron_door_4_0",
+      "category": "doors",
+      "url": "/assets/separated/doors/019_iron_door_4_0.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -7.202030658721924,
+          0.014999999664723873,
+          5.896500110626221
+        ],
+        [
+          -6.797969341278076,
+          0.6349999904632568,
+          5.941500186920166
+        ]
+      ],
+      "sourceIndex": 19
+    },
+    {
+      "id": "4_0_building-e_1",
+      "sourceNode": "4_0_building-e_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/020_4_0_building-e_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -7.758206367492676,
+          0.030000001192092896,
+          4.693999767303467
+        ],
+        [
+          -6.431563854217529,
+          0.75,
+          5.723999977111816
+        ]
+      ],
+      "sourceIndex": 20
+    },
+    {
+      "id": "4_0_building-e",
+      "sourceNode": "4_0_building-e",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/021_4_0_building-e.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -7.841794013977051,
+          0.0,
+          4.604000091552734
+        ],
+        [
+          -6.158205986022949,
+          1.649999976158142,
+          5.894000053405762
+        ]
+      ],
+      "sourceIndex": 21
+    },
+    {
+      "id": "3_5_building-d_1",
+      "sourceNode": "3_5_building-d_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/022_3_5_building-d_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          5.928205966949463,
+          0.5499999523162842,
+          2.1333577632904053
+        ],
+        [
+          6.608205795288086,
+          1.3660449981689453,
+          3.0799999237060547
+        ]
+      ],
+      "sourceIndex": 22
+    },
+    {
+      "id": "3_5_building-d",
+      "sourceNode": "3_5_building-d",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/023_3_5_building-d.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          5.808206081390381,
+          -4.51194631754889e-17,
+          1.8799998760223389
+        ],
+        [
+          6.691793918609619,
+          1.4145522117614746,
+          3.3000001907348633
+        ]
+      ],
+      "sourceIndex": 23
+    },
+    {
+      "id": "iron_door_3_4",
+      "sourceNode": "iron_door_3_4",
+      "category": "doors",
+      "url": "/assets/separated/doors/024_iron_door_3_4.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          3.2899999618530273,
+          0.014999999664723873,
+          3.69952130317688
+        ],
+        [
+          3.7100000381469727,
+          0.5899999737739563,
+          3.744521141052246
+        ]
+      ],
+      "sourceIndex": 24
+    },
+    {
+      "id": "3_4_building-c_1",
+      "sourceNode": "3_4_building-c_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/025_3_4_building-c_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          3.6205530166625977,
+          0.019999999552965164,
+          1.809000015258789
+        ],
+        [
+          3.8205528259277344,
+          0.25,
+          1.809000015258789
+        ]
+      ],
+      "sourceIndex": 25
+    },
+    {
+      "id": "3_4_building-c",
+      "sourceNode": "3_4_building-c",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/026_3_4_building-c.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          2.908205986022949,
+          -2.275713043234525e-15,
+          1.5889999866485596
+        ],
+        [
+          4.7841410636901855,
+          1.25,
+          3.697021245956421
+        ]
+      ],
+      "sourceIndex": 26
+    },
+    {
+      "id": "iron_door_3_3",
+      "sourceNode": "iron_door_3_3",
+      "category": "doors",
+      "url": "/assets/separated/doors/027_iron_door_3_3.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          0.7900000214576721,
+          0.014999999664723873,
+          3.125500202178955
+        ],
+        [
+          1.2100000381469727,
+          0.6349999904632568,
+          3.1705000400543213
+        ]
+      ],
+      "sourceIndex": 27
+    },
+    {
+      "id": "3_3_building-b_1",
+      "sourceNode": "3_3_building-b_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/028_3_3_building-b_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          0.3825215697288513,
+          0.030000001192092896,
+          1.9209998846054077
+        ],
+        [
+          2.1725215911865234,
+          1.0499999523162842,
+          2.6010000705718994
+        ]
+      ],
+      "sourceIndex": 28
+    },
+    {
+      "id": "3_3_building-b",
+      "sourceNode": "3_3_building-b",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/029_3_3_building-b.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          0.20893371105194092,
+          -4.242983379770251e-16,
+          1.8610000610351562
+        ],
+        [
+          2.2925217151641846,
+          1.4700000286102295,
+          3.123000144958496
+        ]
+      ],
+      "sourceIndex": 29
+    },
+    {
+      "id": "3_2_building-a_1",
+      "sourceNode": "3_2_building-a_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/030_3_2_building-a_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -2.7074780464172363,
+          0.030000001192092896,
+          1.9209998846054077
+        ],
+        [
+          -0.827478289604187,
+          1.0499999523162842,
+          2.6010000705718994
+        ]
+      ],
+      "sourceIndex": 30
+    },
+    {
+      "id": "3_2_building-a",
+      "sourceNode": "3_2_building-a",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/031_3_2_building-a.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -2.7910666465759277,
+          0.0,
+          1.878999948501587
+        ],
+        [
+          -0.7074782848358154,
+          1.4700000286102295,
+          3.121000051498413
+        ]
+      ],
+      "sourceIndex": 31
+    },
+    {
+      "id": "iron_door_3_1",
+      "sourceNode": "iron_door_3_1",
+      "category": "doors",
+      "url": "/assets/separated/doors/032_iron_door_3_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -4.706606864929199,
+          0.014999999664723873,
+          3.197500228881836
+        ],
+        [
+          -4.293393135070801,
+          0.48169398307800293,
+          3.2425003051757812
+        ]
+      ],
+      "sourceIndex": 32
+    },
+    {
+      "id": "3_1_building-t_1",
+      "sourceNode": "3_1_building-t_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/033_3_1_building-t_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -4.947275161743164,
+          0.019999999552965164,
+          1.9950001239776611
+        ],
+        [
+          -3.5472750663757324,
+          0.9660450220108032,
+          3.1549999713897705
+        ]
+      ],
+      "sourceIndex": 33
+    },
+    {
+      "id": "3_1_building-t",
+      "sourceNode": "3_1_building-t",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/034_3_1_building-t.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -5.110862731933594,
+          0.0,
+          1.8049999475479126
+        ],
+        [
+          -3.389137029647827,
+          1.014552116394043,
+          3.195000171661377
+        ]
+      ],
+      "sourceIndex": 34
+    },
+    {
+      "id": "iron_door_3_0",
+      "sourceNode": "iron_door_3_0",
+      "category": "doors",
+      "url": "/assets/separated/doors/035_iron_door_3_0.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -7.210000038146973,
+          0.014999999664723873,
+          2.9606378078460693
+        ],
+        [
+          -6.789999961853027,
+          0.3999238908290863,
+          3.0056376457214355
+        ]
+      ],
+      "sourceIndex": 35
+    },
+    {
+      "id": "3_0_building-s_1",
+      "sourceNode": "3_0_building-s_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/036_3_0_building-s_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -7.215000152587891,
+          0.17999999225139618,
+          2.119999885559082
+        ],
+        [
+          -5.885000228881836,
+          0.2199999839067459,
+          2.119999885559082
+        ]
+      ],
+      "sourceIndex": 36
+    },
+    {
+      "id": "3_0_building-s",
+      "sourceNode": "3_0_building-s",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/037_3_0_building-s.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -7.820000171661377,
+          0.0,
+          2.0418622493743896
+        ],
+        [
+          -5.699999809265137,
+          0.8367910385131836,
+          2.9581377506256104
+        ]
+      ],
+      "sourceIndex": 37
+    },
+    {
+      "id": "2_5_building-r_1",
+      "sourceNode": "2_5_building-r_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/038_2_5_building-r_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          4.841794013977051,
+          0.030000001192092896,
+          -0.16600021719932556
+        ],
+        [
+          7.121793746948242,
+          1.0499999523162842,
+          0.45399948954582214
+        ]
+      ],
+      "sourceIndex": 38
+    },
+    {
+      "id": "2_5_building-r",
+      "sourceNode": "2_5_building-r",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/039_2_5_building-r.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          4.758205890655518,
+          0.0,
+          -0.6360002756118774
+        ],
+        [
+          7.241794109344482,
+          1.3930000066757202,
+          0.635999858379364
+        ]
+      ],
+      "sourceIndex": 39
+    },
+    {
+      "id": "iron_door_2_4",
+      "sourceNode": "iron_door_2_4",
+      "category": "doors",
+      "url": "/assets/separated/doors/040_iron_door_2_4.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          3.2899999618530273,
+          0.014999999664723873,
+          0.8985000848770142
+        ],
+        [
+          3.7100000381469727,
+          0.4197999835014343,
+          0.9435001015663147
+        ]
+      ],
+      "sourceIndex": 40
+    },
+    {
+      "id": "2_4_building-q_1",
+      "sourceNode": "2_4_building-q_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/041_2_4_building-q_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          2.341794013977051,
+          0.030000001192092896,
+          -0.7060002088546753
+        ],
+        [
+          4.1617937088012695,
+          0.6660450100898743,
+          0.41400015354156494
+        ]
+      ],
+      "sourceIndex": 41
+    },
+    {
+      "id": "2_4_building-q",
+      "sourceNode": "2_4_building-q",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/042_2_4_building-q.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          2.201794147491455,
+          0.0,
+          -0.8738914728164673
+        ],
+        [
+          4.341794013977051,
+          0.8799999952316284,
+          0.8960000872612
+        ]
+      ],
+      "sourceIndex": 42
+    },
+    {
+      "id": "iron_door_2_3",
+      "sourceNode": "iron_door_2_3",
+      "category": "doors",
+      "url": "/assets/separated/doors/043_iron_door_2_3.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          0.7979694604873657,
+          0.014999999664723873,
+          0.4984999895095825
+        ],
+        [
+          1.2020305395126343,
+          0.39500001072883606,
+          0.5435000061988831
+        ]
+      ],
+      "sourceIndex": 43
+    },
+    {
+      "id": "2_3_building-p_1",
+      "sourceNode": "2_3_building-p_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/044_2_3_building-p_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          0.33179396390914917,
+          0.030000001192092896,
+          -0.30600008368492126
+        ],
+        [
+          1.6617939472198486,
+          0.6660450100898743,
+          0.2139998823404312
+        ]
+      ],
+      "sourceIndex": 44
+    },
+    {
+      "id": "2_3_building-p",
+      "sourceNode": "2_3_building-p",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/045_2_3_building-p.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          0.15820610523223877,
+          0.0,
+          -0.4959999918937683
+        ],
+        [
+          1.8417940139770508,
+          0.7145521640777588,
+          0.4959999918937683
+        ]
+      ],
+      "sourceIndex": 45
+    },
+    {
+      "id": "2_2_building-o_1",
+      "sourceNode": "2_2_building-o_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/046_2_2_building-o_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -2.8000001907348633,
+          0.5499999523162842,
+          0.03999996930360794
+        ],
+        [
+          -2.0399999618530273,
+          0.6499999761581421,
+          0.7199999690055847
+        ]
+      ],
+      "sourceIndex": 46
+    },
+    {
+      "id": "2_2_building-o",
+      "sourceNode": "2_2_building-o",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/047_2_2_building-o.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -2.8835878372192383,
+          0.0,
+          -1.862645149230957e-08
+        ],
+        [
+          -2.0,
+          0.9179999828338623,
+          1.2400000095367432
+        ]
+      ],
+      "sourceIndex": 47
+    },
+    {
+      "id": "iron_door_2_1",
+      "sourceNode": "iron_door_2_1",
+      "category": "doors",
+      "url": "/assets/separated/doors/048_iron_door_2_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -4.625,
+          0.014999999664723873,
+          1.2725000381469727
+        ],
+        [
+          -4.375,
+          0.6349999904632568,
+          1.3174999952316284
+        ]
+      ],
+      "sourceIndex": 48
+    },
+    {
+      "id": "2_1_building-n_1",
+      "sourceNode": "2_1_building-n_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/049_2_1_building-n_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -5.220000267028809,
+          0.5499999523162842,
+          0.03999997675418854
+        ],
+        [
+          -4.539999961853027,
+          0.6700000762939453,
+          0.7199999690055847
+        ]
+      ],
+      "sourceIndex": 49
+    },
+    {
+      "id": "2_1_building-n",
+      "sourceNode": "2_1_building-n",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/050_2_1_building-n.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -5.440000057220459,
+          -6.8571708311537805e-09,
+          -0.15000009536743164
+        ],
+        [
+          -4.463377952575684,
+          1.9045557975769043,
+          1.2699999809265137
+        ]
+      ],
+      "sourceIndex": 50
+    },
+    {
+      "id": "iron_door_2_0",
+      "sourceNode": "iron_door_2_0",
+      "category": "doors",
+      "url": "/assets/separated/doors/051_iron_door_2_0.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -7.157953262329102,
+          0.014999999664723873,
+          0.8525000214576721
+        ],
+        [
+          -6.842046737670898,
+          0.6349999904632568,
+          0.8975000381469727
+        ]
+      ],
+      "sourceIndex": 51
+    },
+    {
+      "id": "2_0_building-m_1",
+      "sourceNode": "2_0_building-m_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/052_2_0_building-m_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -7.579999923706055,
+          0.14999999105930328,
+          -0.7800001502037048
+        ],
+        [
+          -6.420000076293945,
+          0.6499999761581421,
+          0.7799999713897705
+        ]
+      ],
+      "sourceIndex": 52
+    },
+    {
+      "id": "2_0_building-m",
+      "sourceNode": "2_0_building-m",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/053_2_0_building-m.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -7.658137798309326,
+          0.0,
+          -0.8500000238418579
+        ],
+        [
+          -6.341862201690674,
+          1.519006609916687,
+          0.8500000238418579
+        ]
+      ],
+      "sourceIndex": 53
+    },
+    {
+      "id": "1_5_building-l_1",
+      "sourceNode": "1_5_building-l_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/054_1_5_building-l_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          4.950000286102295,
+          0.019999999552965164,
+          -2.990999937057495
+        ],
+        [
+          6.75,
+          0.9660450220108032,
+          -1.8309998512268066
+        ]
+      ],
+      "sourceIndex": 54
+    },
+    {
+      "id": "1_5_building-l",
+      "sourceNode": "1_5_building-l",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/055_1_5_building-l.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          4.786412239074707,
+          -6.261583359519332e-34,
+          -3.2109999656677246
+        ],
+        [
+          6.869999885559082,
+          1.9249999523162842,
+          -1.340999960899353
+        ]
+      ],
+      "sourceIndex": 55
+    },
+    {
+      "id": "iron_door_1_4",
+      "sourceNode": "iron_door_1_4",
+      "category": "doors",
+      "url": "/assets/separated/doors/056_iron_door_1_4.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          3.3436570167541504,
+          0.014999999664723873,
+          -2.047499895095825
+        ],
+        [
+          3.6563429832458496,
+          0.39500001072883606,
+          -2.002500057220459
+        ]
+      ],
+      "sourceIndex": 56
+    },
+    {
+      "id": "1_4_building-k_1",
+      "sourceNode": "1_4_building-k_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/057_1_4_building-k_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          3.64329195022583,
+          0.019999999552965164,
+          -2.880000114440918
+        ],
+        [
+          3.843291759490967,
+          0.25,
+          -2.880000114440918
+        ]
+      ],
+      "sourceIndex": 57
+    },
+    {
+      "id": "1_4_building-k",
+      "sourceNode": "1_4_building-k",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/058_1_4_building-k.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          3.0985703468322754,
+          0.0,
+          -2.963587760925293
+        ],
+        [
+          4.401429653167725,
+          0.772741436958313,
+          -2.049999952316284
+        ]
+      ],
+      "sourceIndex": 58
+    },
+    {
+      "id": "iron_door_1_3",
+      "sourceNode": "iron_door_1_3",
+      "category": "doors",
+      "url": "/assets/separated/doors/059_iron_door_1_3.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          0.875,
+          0.014999999664723873,
+          -1.5734999179840088
+        ],
+        [
+          1.125,
+          0.4111270606517792,
+          -1.528499960899353
+        ]
+      ],
+      "sourceIndex": 59
+    },
+    {
+      "id": "1_3_building-j_1",
+      "sourceNode": "1_3_building-j_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/060_1_3_building-j_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          0.49179399013519287,
+          0.6499999761581421,
+          -2.3259999752044678
+        ],
+        [
+          0.49179399013519287,
+          0.699999988079071,
+          -2.125999927520752
+        ]
+      ],
+      "sourceIndex": 60
+    },
+    {
+      "id": "1_3_building-j",
+      "sourceNode": "1_3_building-j",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/061_1_3_building-j.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          0.3017939329147339,
+          1.2993813636148028e-16,
+          -2.875999927520752
+        ],
+        [
+          1.3284157514572144,
+          0.8611457943916321,
+          -1.5759999752044678
+        ]
+      ],
+      "sourceIndex": 61
+    },
+    {
+      "id": "1_2_building-i_1",
+      "sourceNode": "1_2_building-i_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/062_1_2_building-i_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -1.6617939472198486,
+          0.019999999552965164,
+          -2.194000005722046
+        ],
+        [
+          -1.0717939138412476,
+          0.25,
+          -2.194000005722046
+        ]
+      ],
+      "sourceIndex": 62
+    },
+    {
+      "id": "1_2_building-i",
+      "sourceNode": "1_2_building-i",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/063_1_2_building-i.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -1.8299317359924316,
+          1.2993810989170068e-16,
+          -3.4240000247955322
+        ],
+        [
+          -0.8017939925193787,
+          0.7335410118103027,
+          -2.124000072479248
+        ]
+      ],
+      "sourceIndex": 63
+    },
+    {
+      "id": "iron_door_1_1",
+      "sourceNode": "iron_door_1_1",
+      "category": "doors",
+      "url": "/assets/separated/doors/064_iron_door_1_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -4.658607006072998,
+          0.014999999664723873,
+          -1.563499927520752
+        ],
+        [
+          -4.341392993927002,
+          0.39500001072883606,
+          -1.5184999704360962
+        ]
+      ],
+      "sourceIndex": 64
+    },
+    {
+      "id": "1_1_building-h_1",
+      "sourceNode": "1_1_building-h_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/065_1_1_building-h_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -5.3282060623168945,
+          0.14999999105930328,
+          -2.4059998989105225
+        ],
+        [
+          -5.128206253051758,
+          0.25,
+          -1.6459999084472656
+        ]
+      ],
+      "sourceIndex": 65
+    },
+    {
+      "id": "1_1_building-h",
+      "sourceNode": "1_1_building-h",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/066_1_1_building-h.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -5.491794109344482,
+          -4.113470665706529e-15,
+          -2.875999927520752
+        ],
+        [
+          -4.170068264007568,
+          0.7335410118103027,
+          -1.565999984741211
+        ]
+      ],
+      "sourceIndex": 66
+    },
+    {
+      "id": "iron_door_1_0",
+      "sourceNode": "iron_door_1_0",
+      "category": "doors",
+      "url": "/assets/separated/doors/067_iron_door_1_0.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -7.201376438140869,
+          0.014999999664723873,
+          -1.855705738067627
+        ],
+        [
+          -6.798623561859131,
+          0.6038000583648682,
+          -1.8107057809829712
+        ]
+      ],
+      "sourceIndex": 67
+    },
+    {
+      "id": "1_0_building-g_1",
+      "sourceNode": "1_0_building-g_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/068_1_0_building-g_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -7.549069404602051,
+          0.14999999105930328,
+          -3.058206081390381
+        ],
+        [
+          -6.069068908691406,
+          1.0499999523162842,
+          -1.978205919265747
+        ]
+      ],
+      "sourceIndex": 68
+    },
+    {
+      "id": "1_0_building-g",
+      "sourceNode": "1_0_building-g",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/069_1_0_building-g.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -7.589069366455078,
+          -5.551042736584577e-09,
+          -3.141793966293335
+        ],
+        [
+          -5.91093111038208,
+          1.28000009059906,
+          -1.858205795288086
+        ]
+      ],
+      "sourceIndex": 69
+    },
+    {
+      "id": "0_5_building-f_1",
+      "sourceNode": "0_5_building-f_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/070_0_5_building-f_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          5.678205966949463,
+          0.019999999552965164,
+          -5.620642185211182
+        ],
+        [
+          7.158205986022949,
+          1.0660450458526611,
+          -4.694000244140625
+        ]
+      ],
+      "sourceIndex": 70
+    },
+    {
+      "id": "0_5_building-f",
+      "sourceNode": "0_5_building-f",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/071_0_5_building-f.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          5.558206081390381,
+          -3.609556789341316e-16,
+          -5.894000053405762
+        ],
+        [
+          7.348206520080566,
+          1.9249999523162842,
+          -4.613999843597412
+        ]
+      ],
+      "sourceIndex": 71
+    },
+    {
+      "id": "iron_door_0_4",
+      "sourceNode": "iron_door_0_4",
+      "category": "doors",
+      "url": "/assets/separated/doors/072_iron_door_0_4.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          3.297969341278076,
+          0.014999999664723873,
+          -4.103499889373779
+        ],
+        [
+          3.702030658721924,
+          0.6349999904632568,
+          -4.058499813079834
+        ]
+      ],
+      "sourceIndex": 72
+    },
+    {
+      "id": "0_4_building-e_1",
+      "sourceNode": "0_4_building-e_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/073_0_4_building-e_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          2.741793632507324,
+          0.030000001192092896,
+          -5.306000232696533
+        ],
+        [
+          4.068436145782471,
+          0.75,
+          -4.276000022888184
+        ]
+      ],
+      "sourceIndex": 73
+    },
+    {
+      "id": "0_4_building-e",
+      "sourceNode": "0_4_building-e",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/074_0_4_building-e.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          2.658205986022949,
+          0.0,
+          -5.395999908447266
+        ],
+        [
+          4.341794013977051,
+          1.649999976158142,
+          -4.105999946594238
+        ]
+      ],
+      "sourceIndex": 74
+    },
+    {
+      "id": "iron_door_0_3",
+      "sourceNode": "iron_door_0_3",
+      "category": "doors",
+      "url": "/assets/separated/doors/075_iron_door_0_3.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          0.875,
+          0.014999999664723873,
+          -4.377500057220459
+        ],
+        [
+          1.125,
+          0.6349999904632568,
+          -4.332499980926514
+        ]
+      ],
+      "sourceIndex": 75
+    },
+    {
+      "id": "0_3_building-d_1",
+      "sourceNode": "0_3_building-d_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/076_0_3_building-d_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          0.6782060265541077,
+          0.5499999523162842,
+          -5.366641998291016
+        ],
+        [
+          1.3582059144973755,
+          1.3660449981689453,
+          -4.420000076293945
+        ]
+      ],
+      "sourceIndex": 76
+    },
+    {
+      "id": "0_3_building-d",
+      "sourceNode": "0_3_building-d",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/077_0_3_building-d.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          0.5582060217857361,
+          -4.51194631754889e-17,
+          -5.619999885559082
+        ],
+        [
+          1.4417939186096191,
+          1.4145522117614746,
+          -4.199999809265137
+        ]
+      ],
+      "sourceIndex": 77
+    },
+    {
+      "id": "0_2_building-c_1",
+      "sourceNode": "0_2_building-c_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/078_0_2_building-c_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -2.1294469833374023,
+          0.019999999552965164,
+          -5.690999984741211
+        ],
+        [
+          -1.929447054862976,
+          0.25,
+          -5.690999984741211
+        ]
+      ],
+      "sourceIndex": 78
+    },
+    {
+      "id": "0_2_building-c",
+      "sourceNode": "0_2_building-c",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/079_0_2_building-c.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -2.841794013977051,
+          -2.275713043234525e-15,
+          -5.9110002517700195
+        ],
+        [
+          -0.965859055519104,
+          1.25,
+          -3.802978754043579
+        ]
+      ],
+      "sourceIndex": 79
+    },
+    {
+      "id": "iron_door_0_1",
+      "sourceNode": "iron_door_0_1",
+      "category": "doors",
+      "url": "/assets/separated/doors/080_iron_door_0_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -4.710000038146973,
+          0.014999999664723873,
+          -4.374499797821045
+        ],
+        [
+          -4.289999961853027,
+          0.6349999904632568,
+          -4.3294997215271
+        ]
+      ],
+      "sourceIndex": 80
+    },
+    {
+      "id": "0_1_building-b_1",
+      "sourceNode": "0_1_building-b_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/081_0_1_building-b_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -5.367478370666504,
+          0.030000001192092896,
+          -5.578999996185303
+        ],
+        [
+          -3.5774784088134766,
+          1.0499999523162842,
+          -4.89900016784668
+        ]
+      ],
+      "sourceIndex": 81
+    },
+    {
+      "id": "0_1_building-b",
+      "sourceNode": "0_1_building-b",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/082_0_1_building-b.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -5.5410661697387695,
+          -4.242983379770251e-16,
+          -5.638999938964844
+        ],
+        [
+          -3.4574782848358154,
+          1.4700000286102295,
+          -4.376999855041504
+        ]
+      ],
+      "sourceIndex": 82
+    },
+    {
+      "id": "iron_door_0_0",
+      "sourceNode": "iron_door_0_0",
+      "category": "doors",
+      "url": "/assets/separated/doors/083_iron_door_0_0.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -7.210000038146973,
+          0.014999999664723873,
+          -4.376500129699707
+        ],
+        [
+          -6.789999961853027,
+          0.6349999904632568,
+          -4.331500053405762
+        ]
+      ],
+      "sourceIndex": 83
+    },
+    {
+      "id": "0_0_building-a_1",
+      "sourceNode": "0_0_building-a_1",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/084_0_0_building-a_1.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -7.922521591186523,
+          0.030000001192092896,
+          -5.10099983215332
+        ],
+        [
+          -6.042521953582764,
+          1.0499999523162842,
+          -4.421000003814697
+        ]
+      ],
+      "sourceIndex": 84
+    },
+    {
+      "id": "0_0_building-a",
+      "sourceNode": "0_0_building-a",
+      "category": "buildings",
+      "url": "/assets/separated/buildings/085_0_0_building-a.glb",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": [
+        [
+          -8.042521476745605,
+          0.0,
+          -5.621000289916992
+        ],
+        [
+          -5.958933353424072,
+          1.4700000286102295,
+          -4.379000186920166
+        ]
+      ],
+      "sourceIndex": 85
+    }
+  ]
+}
