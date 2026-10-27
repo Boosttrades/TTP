@@ -9,9 +9,9 @@ export class InvisiblePlayerController {
   constructor({ scene, camera, renderer, city, start = new THREE.Vector3(0, 0, 0) }) {
     this.scene = scene; this.camera = camera; this.renderer = renderer; this.city = city;
     this.position = start.clone(); this.velocityY = 0; this.grounded = true;
-    this.speed = 0.56; this.runMultiplier = 2.5; this.jumpSpeed = 5.3;
+    this.speed = 0.56; this.runMultiplier = 2.5; this.jumpSpeed = 5.3 / 3;
     this.radius = 0.32; this.height = 1.7;
-    this.input = { x: 0, y: 0, run: false, jump: false };
+    this.input = { x: 0, y: 0, run: false, jump: false, slide: false };
     this.yaw = 0; this.pitch = -0.04; this.lookPointer = null; this.lastPointer = null;
     this.raycaster = new THREE.Raycaster(); this.raycaster.near = 0; this.raycaster.far = this.radius + 0.12;
     this._makeCollider(); this._makeJoystick(); this._bindLook(); this._bindKeys(); this._bindButtons();
@@ -24,7 +24,7 @@ export class InvisiblePlayerController {
   }
   _makeJoystick() {
     const style = document.createElement('style');
-    style.textContent = `.tpp-stick-base{position:fixed;left:26px;bottom:30px;width:124px;height:124px;border-radius:50%;background:#ffffff20;border:2px solid #ffffff70;z-index:1000;touch-action:none;display:none}.tpp-stick-knob{position:absolute;width:54px;height:54px;left:33px;top:33px;border-radius:50%;background:#ffffff9c;border:2px solid #fff;box-sizing:border-box}.tpp-action{position:fixed;right:24px;bottom:36px;z-index:1001;padding:12px 16px;border-radius:24px;border:1px solid #ffffffa0;background:#18202ccc;color:white;font:600 14px system-ui;touch-action:manipulation}.tpp-run{right:26px;bottom:100px}.tpp-jump{right:26px;bottom:38px}@media (pointer:coarse){.tpp-stick-base{display:block}}`;
+    style.textContent = `.tpp-stick-base{position:fixed;left:26px;bottom:30px;width:124px;height:124px;border-radius:50%;background:#ffffff20;border:2px solid #ffffff70;z-index:1000;touch-action:none;display:none}.tpp-stick-knob{position:absolute;width:54px;height:54px;left:33px;top:33px;border-radius:50%;background:#ffffff9c;border:2px solid #fff;box-sizing:border-box}.tpp-action{position:fixed;right:24px;bottom:36px;z-index:1001;padding:12px 16px;border-radius:24px;border:1px solid #ffffffa0;background:#18202ccc;color:white;font:600 14px system-ui;touch-action:manipulation}.tpp-run{right:26px;bottom:100px}.tpp-jump{right:26px;bottom:38px}.tpp-slide{right:104px;bottom:38px}@media (pointer:coarse){.tpp-stick-base{display:block}}`;
     document.head.appendChild(style); this.joystickStyle = style;
     this.stick = document.createElement('div'); this.stick.className = 'tpp-stick-base';
     this.knob = document.createElement('div'); this.knob.className = 'tpp-stick-knob'; this.stick.appendChild(this.knob); document.body.appendChild(this.stick);
@@ -64,6 +64,8 @@ export class InvisiblePlayerController {
     this.runButton.addEventListener('pointerdown', runOn); this.runButton.addEventListener('pointerup', runOff); this.runButton.addEventListener('pointercancel', runOff); this.runButton.addEventListener('pointerleave', runOff);
     this.jumpButton.addEventListener('pointerdown', e => { e.preventDefault(); this.input.jump = true; });
     const jumpOff = () => { this.input.jump = false; }; this.jumpButton.addEventListener('pointerup', jumpOff); this.jumpButton.addEventListener('pointercancel', jumpOff);
+    this.slideButton.addEventListener('pointerdown', e => { e.preventDefault(); this.input.slide = true; });
+    const slideOff = () => { this.input.slide = false; }; this.slideButton.addEventListener('pointerup', slideOff); this.slideButton.addEventListener('pointercancel', slideOff); this.slideButton.addEventListener('pointerleave', slideOff);
   }
   _blockedAt(candidate, movement) {
     if (!this.city || movement.lengthSq() < 1e-10) return false;
@@ -89,7 +91,7 @@ export class InvisiblePlayerController {
     const forwardInput = this.input.y + (this.keys.has('KeyW') || this.keys.has('ArrowUp') ? 1 : 0) - (this.keys.has('KeyS') || this.keys.has('ArrowDown') ? 1 : 0);
     const sideInput = this.input.x + (this.keys.has('KeyD') || this.keys.has('ArrowRight') ? 1 : 0) - (this.keys.has('KeyA') || this.keys.has('ArrowLeft') ? 1 : 0);
     const inputLen = Math.hypot(sideInput, forwardInput), forward = new THREE.Vector3(-Math.sin(this.yaw), 0, -Math.cos(this.yaw)), right = new THREE.Vector3(Math.cos(this.yaw), 0, -Math.sin(this.yaw)), move = new THREE.Vector3();
-    if (inputLen > 0.001) { move.addScaledVector(forward, forwardInput / Math.max(1, inputLen)); move.addScaledVector(right, sideInput / Math.max(1, inputLen)); move.normalize().multiplyScalar(this.speed * ((this.input.run || this.keys.has('ShiftLeft') || this.keys.has('ShiftRight')) ? this.runMultiplier : 1) * dt); }
+    if (inputLen > 0.001) { move.addScaledVector(forward, forwardInput / Math.max(1, inputLen)); move.addScaledVector(right, sideInput / Math.max(1, inputLen)); move.normalize().multiplyScalar(this.speed * (this.input.slide ? 0.45 : ((this.input.run || this.keys.has('ShiftLeft') || this.keys.has('ShiftRight')) ? this.runMultiplier : 1)) * dt); }
     const nextX = this.position.clone(); nextX.x += move.x; if (!this._blockedAt(nextX, new THREE.Vector3(move.x, 0, 0))) this.position.x = nextX.x;
     const nextZ = this.position.clone(); nextZ.z += move.z; if (!this._blockedAt(nextZ, new THREE.Vector3(0, 0, move.z))) this.position.z = nextZ.z;
     if (this.input.jump && this.grounded) { this.velocityY = this.jumpSpeed; this.grounded = false; }
@@ -109,6 +111,6 @@ export class InvisiblePlayerController {
     this.camera.lookAt(eye.clone().add(direction));
   }
   dispose() {
-    window.removeEventListener('resize', this._resize); this.stick?.remove(); this.runButton?.remove(); this.jumpButton?.remove(); this.joystickStyle?.remove(); this.scene.remove(this.collider);
+    window.removeEventListener('resize', this._resize); this.stick?.remove(); this.runButton?.remove(); this.jumpButton?.remove(); this.slideButton?.remove(); this.joystickStyle?.remove(); this.scene.remove(this.collider);
   }
 }
