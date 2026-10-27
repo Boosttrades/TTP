@@ -273,7 +273,8 @@ export function loadDenseCity(scene, {
           panel.position.set(spec.x, barrierY, spec.z);
           panel.rotation.y = spec.rotation;
           panel.renderOrder = 5;
-          // Keep the barrier inside the city hierarchy so the player's existing raycast collision detects it.\n          city.add(panel);
+          // Keep the barrier inside the city hierarchy so the player's existing raycast collision detects it.
+          city.add(panel);
 
           // Bright top and bottom rails make the boundary legible from a distance.
           for (const y of [bounds.min.y + 0.08, bounds.min.y + barrierHeight]) {
